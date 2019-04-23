@@ -31,7 +31,23 @@ var myVariables = {
                 filter: "progid: DXImageTransform.Microsoft.gradient(startColorstr = '#f1043b', endColorstr = '#940023', GradientType = 1)",
                 position: "absolute",
                 zIndex: "-1",
+                display: "flex",
+            },
+            cstyling: {
+                height: "80vh",
+                width: "60vw",
+                backgroundColor: "blue",
+                border: "none !important",
+                padding: "none !important",
+                display: "inline-flex",
+                marginLeft: "30vw",
+                marginTop: "10vh",
+                borderRadius: "20px",
             }
+        },
+        mainContent: {
+            div1: "$('<div>', { class: 'mainDiv', id: 'mainDiv' })",
+            div2: "$('<canvas>', { class: 'mainCanvas', id: '' })",
         },
         sidebar: {
             self: $("#sidebar"),
@@ -59,7 +75,7 @@ $(function () {
                 case main:
                     console.log(main)
                     var container = section.self;
-                    var maindiv = $("<div>", { id: "", class: "mainWrap" })
+                    var maindiv = $("<div>", { id: "mainWrap", class: "mainWrap" })
                     var m = section.styling;
                     console.log(m)
                     maindiv.css({
@@ -74,9 +90,25 @@ $(function () {
                         backgroundSize: m.backgroundSize,
                         filter: m.filter,
                         position: m.position,
-                        zIndex: m.zIndex
+                        zIndex: m.zIndex,
+                        display: m.display
                     })
                     container.append(maindiv)
+                    var maincanvas = $("<canvas>", { id: "mainCanvas", class: "mainCanvas" });
+                    var c = section.cstyling;
+                    console.log(c);
+                    maincanvas.css({
+                        height: c.height,
+                        width: c.width,
+                        backgroundColor: c.backgroundColor,
+                        border: c.border,
+                        padding: c.padding,
+                        display: c.display,
+                        marginLeft: c.marginLeft,
+                        marginTop: c.marginTop,
+                        borderRadius: c.borderRadius
+                    })
+                    maindiv.append(maincanvas)
                     break;
                 // 
             }
@@ -99,11 +131,8 @@ $(function () {
             }
         })
     }
+
     initializePage();
-
-
-    /// END initialize page ///
-
     /// Side Bar Sliding Function ///
     var SBSfunction = myVariables.buttons.foundational.sideSlideButton
     var SBSfunctionMainwrap = myVariables.sections.main.self
@@ -122,5 +151,6 @@ $(function () {
             sideSlide = false;
         }
     })
+
     /// END ///
 })
