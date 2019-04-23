@@ -1,0 +1,102 @@
+Making a Trivia Game:
+
+Start Button
+    -> 
+        Popup timer with the question display for 3 seconds (counting down)
+            ->
+            As popup timer runs fade in each possibel answer
+            -> 
+                End popup timer and introduce 10 second gameplay timer
+                    -> 
+                        User picks an answer   
+                            (if correct) Congratulations display, score +1, next round
+                            (if incorrect):
+                                - Incorrect display, fails +1, next round
+                                - if (fails = 3):
+                                    - Lose the game, reset all variables and show initial screen
+
+.sideHide {
+-webkit-animation: sideHide 5s infinite; /* Safari 4.0 - 8.0 */
+animation: sideHide 5s infinite;
+animation-iteration-count: 1;
+}
+
+@keyframes sideHide {
+    from {left: -35vh;}
+    to {left: 0vh;}
+  }
+
+
+
+
+
+
+RIP : 
+
+  case sidebar:
+                //     console.log("sidebar")
+                //     function appending() {
+                //         var container = swContent.container.self;
+                //         var row1 = swContent.container.row1;
+                //         var row2 = swContent.container.row2;
+                //         var row3 = swContent.container.row3;
+                //         var loop = [row1, row2, row3];
+
+                //         for (x = 0, x < loop.length; x++;) {
+                //             var item = loop[x];
+                //             console.log(item)
+                //             item.content();
+                //             container.append(item);
+                //         }
+                //     }
+                //     var container = section.self;
+                //     var sideBar = $("<div>", { id: "sidebar", class: "wrapper sideWrap" });
+                //     var swContent = {
+                //         container: {
+                //             self: $("#sideContainer"),
+                //             row1: {
+                //                 self: $("#sideRowFirst"),
+                //                 content: function () {
+                //                     var self = $("#sideContainer");
+                //                     var col = $("<div>", { id: "", class: "col m12" });
+                //                     var header = $("<h1>", { id: "", class: "sidebarHeader" })
+                //                     self.append(col);
+                //                     ("SideBar Header").appendTo(header)
+                //                     self.append(header);
+                //                 }
+                //             },
+                //             row2: {
+                //                 self: $("#sideRowSecond"),
+                //                 content: function () {
+                //                     var self = $("#sideContainer");
+                //                     var col = $("<div>", { id: "", class: "col m12" });
+                //                     var button = $("<button>", { id: "sideSlide", class: "btn black white-text" })
+                //                     self.append(col);
+                //                     ("Start").appendTo(button)
+                //                     self.append(button);
+
+                //                 },
+                //             },
+                //             row3: {
+                //                 self: $("#sideRowThird"),
+                //                 content: function () {
+                //                     var self = $("#sideContainer");
+                //                     var color = ["purple", "green", "blue", "yellow"];
+                //                     var col = $("<div", { id: "", class: "col m3" });
+                //                     for (x = 0; x < color.length; x++) {
+                //                         col.addClass(color[x]);
+                //                         ("<p>00<p>").appendTo(col);
+                //                         self.append(col)
+                //                     }
+
+
+                //                 }
+                //             },
+                //         },
+                //     }
+                //     appending();
+                //     sideBar.append(container)
+                //     sideBar.appendTo('body')
+
+
+                //     break;
