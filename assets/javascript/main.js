@@ -154,3 +154,11 @@ $(function () {
 
     /// END ///
 })
+
+$(function () {
+    var canvas = $("#mainCanvas")
+    console.log(canvas)
+
+
+
+})
