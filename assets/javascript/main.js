@@ -33,6 +33,7 @@ var myVariables = {
                 zIndex: "-1",
                 display: "flex",
             },
+
             cstyling: {
                 height: "80vh",
                 width: "60vw",
@@ -46,8 +47,9 @@ var myVariables = {
             }
         },
         mainContent: {
-            div1: "$('<div>', { class: 'mainDiv', id: 'mainDiv' })",
-            div2: "$('<canvas>', { class: 'mainCanvas', id: '' })",
+            button: $("<button>", { id: "showSideButton", class: "btn" }),
+            div1: $('<div>', { class: 'mainDiv', id: 'mainDiv' }),
+            div2: $('<canvas>', { class: 'mainCanvas', id: '' }),
         },
         sidebar: {
             self: $("#sidebar"),
@@ -63,10 +65,10 @@ var myVariables = {
 
 $(function () {
     /// Initialize page ///
-    var page = myVariables.sections
+
     function initializePage() {
-        var main = page.main
-        var sidebar = page.sidebar
+        var main = myVariables.sections.main
+        var sidebar = myVariables.sections.sidebar
         var orderedDocument = [main, sidebar]
         for (x = 0; x < 1; x++) {
             var section = orderedDocument[x];
@@ -77,7 +79,17 @@ $(function () {
                     var container = section.self;
                     var maindiv = $("<div>", { id: "mainWrap", class: "mainWrap" })
                     var m = section.styling;
-                    console.log(m)
+                    var button = $("<button>", { id: "showSideButton", class: "btn" });
+                    button.css({
+                        position: "fixed !important",
+                        top: "0 !important",
+                        marginLeft: "30vw !important",
+                        backgroundColor: "rgb(46, 86, 131) !important",
+                        color: "white",
+                        zIndex: "5",
+                    });
+                    button.text("Toggle Sidebar")
+                    console.log(button)
                     maindiv.css({
                         width: m.width,
                         borderLeft: m.borderLeft,
@@ -93,10 +105,12 @@ $(function () {
                         zIndex: m.zIndex,
                         display: m.display
                     })
+
+                    maindiv.append(button)
                     container.append(maindiv)
                     var maincanvas = $("<canvas>", { id: "mainCanvas", class: "mainCanvas" });
                     var c = section.cstyling;
-                    console.log(c);
+
                     maincanvas.css({
                         height: c.height,
                         width: c.width,
@@ -113,30 +127,32 @@ $(function () {
                 // 
             }
         }
-        var SBSfunction = myVariables.buttons.foundational.sideSlideButton
-        var SBSfunctionMainwrap = myVariables.sections.main.self
-        SBSfunction.self.on("click", function () {
-            console.log("click!")
 
-            if (!SBSfunction.sideSlide) {
-                SBSfunction.container.slideToggle("slow")
-                SBSfunctionMainwrap.css("width") = "100vw";
-                SBSfunctionMainwrap.css("border-left") = "none"
-                sideSlide = true;
-            } if (SBSfunction.sideSlide) {
-                ABSfunction.container.slideToggle("slow")
-                SBSfunctionMainwrap.css("width") = "75vw"
-                SBSfunctionMainwrap.css("border-left") = ".5vw ridge rgba(17, 60, 110, 0.6)"
-                sideSlide = false;
-            }
-        })
     }
 
     initializePage();
     /// Side Bar Sliding Function ///
-    var SBSfunction = myVariables.buttons.foundational.sideSlideButton
+    var SBSfunction = $("#showSideButton")
     var SBSfunctionMainwrap = myVariables.sections.main.self
-    SBSfunction.self.on("click", function () {
+    SBSfunction.on("click", function () {
+        console.log("click!")
+
+        if (!SBSfunction.sideSlide) {
+            SBSfunction.container.slideToggle("slow")
+            SBSfunctionMainwrap.css("width") = "100vw";
+            SBSfunctionMainwrap.css("border-left") = "none"
+            sideSlide = true;
+        } if (SBSfunction.sideSlide) {
+            ABSfunction.container.slideToggle("slow")
+            SBSfunctionMainwrap.css("width") = "75vw"
+            SBSfunctionMainwrap.css("border-left") = ".5vw ridge rgba(17, 60, 110, 0.6)"
+            sideSlide = false;
+        }
+    })
+
+    var SBSfunction = $("#showSideButton")
+    var SBSfunctionMainwrap = myVariables.sections.main.self
+    SBSfunction.on("click", function () {
         console.log("click!")
 
         if (!SBSfunction.sideSlide) {

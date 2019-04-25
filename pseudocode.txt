@@ -100,3 +100,42 @@ RIP :
 
 
                 //     break;
+
+
+
+
+
+        <div class="container" id="sideContainer">
+            <!--Row #1-->
+            <div class="row sideRow" id="sideRowFirst">
+                <div class="col m12">
+                    <h1 class="sidebarHeader">Side Bar</h1>
+                </div>
+            </div>
+            <!--/Row #1-->
+            <!--Row #2-->
+            <div class="row sideRow" id="sideRowSecond">
+                <div class="col m12">
+                    <button class="btn black white-text" style="text-align: center;" id="sideSlide">Side
+                        Bar</button>
+                </div>
+            </div>
+            <!--/Row #2-->
+            <!--Row #3-->
+            <div class="row sideRow" id="sideRowThird">
+                <div class="col m3 purple">
+                    <h3>1</h3>
+                </div>
+                <div class="col m3 green">
+                    <h3>2</h3>
+                </div>
+                <div class="col m3 blue">
+                    <h3>3</h3>
+                </div>
+                <div class="col m3 yellow">
+                    <h3>4</h3>
+                </div>
+            </div>
+            <!--/Row #3-->
+        </div>
+        <!--/Container-->
