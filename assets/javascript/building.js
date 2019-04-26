@@ -164,7 +164,7 @@ for (section = 0; section < 6; section++) {
                 borderRadius: "10px",
             });
             $("#headCol").append(header);
-            $("#headerOne").text("Side Bar")
+            $("#headerOne").text("Las Trivi-Eras")
             $("#headerOne").css({
                 textAlign: "center",
             })
