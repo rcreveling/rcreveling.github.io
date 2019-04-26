@@ -340,22 +340,22 @@ $("#showSideButton").on("click", function () {
 })
 
 
-// Game function work //
+// Game function //
 var triviaQs = {
 
     sections: {
         thirtiesToFifties: {
-            header: "1930's - 1950's Fashion",
+            header: "1930's - 1950's Trivia",
             questions: ["In the 1930's, what could $25 dollars get you at a men's clothing store?",
                 "Question 2", "Question 3", "Question 4"]
         },
         sixtiesToEighties: {
-            header: "1960's to 1980's",
-            questions: ["Was Audrey Hepburn the Baddest Bitch in the land?", "", "", ""],
+            header: "1960's to 1980's Trivia",
+            questions: ["Was Audrey Hepburn the Baddest Bitch in the land?", "Question 2", "Question 3", "Question 4"],
         },
         nineties: {
-            header: "The 1990's",
-            questions: ["Was Limp Bizkit at the Forefront of style and culture?", "", "", ""],
+            header: "The 1990's Trivia",
+            questions: ["Was Limp Bizkit at the Forefront of style and culture?", "Question 2", "Question 3", "Question 4"],
         }
 
     }
@@ -374,44 +374,95 @@ var triviaAnswers = {
                 ]
             },
             {
-                two: ["2 Answer 1",
-                    "2 Answer 2",
-                    "2 Answer 3",
-                    "2 Answer 4"
+                two: ["Section One: 2 Answer 1",
+                    "Section One: 2 Answer 2",
+                    "Section One: 2 Answer 3",
+                    "Section One: 2 Answer 4"
                 ]
             },
             {
-                three: ["3 Answer 1",
-                    "3 Answer 2",
-                    "3 Answer 3",
-                    "3 Answer 4"
+                three: ["Section One: 3 Answer 1",
+                    "Section One: 3 Answer 2",
+                    "Section One: 3 Answer 3",
+                    "Section One: 3 Answer 4"
                 ]
             },
             {
-                four: ["4 Answer 1",
-                    "4 Answer 2",
-                    "4 Answer 3",
-                    "4 Answer 4"
+                four: ["Section One: 4 Answer 1",
+                    "Section One: 4 Answer 2",
+                    "Section One: 4 Answer 3",
+                    "Section One: 4 Answer 4"
                 ]
             }
         ]
     },
 
-    "1960's to 1980's": [
-        { one: [] },
-        { two: [] },
-        { three: [] },
-        { four: [] }
-    ],
+    sectionTwo: {
+        answers: [
+            {
+                one: ["yes",
+                    "no",
+                    "Breakfast at Tiffany's",
+                    "cigarette Holder"]
+            },
+            {
+                two: ["Section Two: 2 Answer 1",
+                    "Section Two: 2 Answer 2",
+                    "Section Two: 2 Answer 3",
+                    "Section Two: 2 Answer 4"
+                ]
+            },
+            {
+                three: ["Section Two: 3 Answer 1",
+                    "Section Two: 3 Answer 2",
+                    "Section Two: 3 Answer 3",
+                    "Section Two: 3 Answer 4"
+                ]
+            },
+            {
+                four: ["Section Two: 4 Answer 1",
+                    "Section Two: 4 Answer 2",
+                    "Section Two: 4 Answer 3",
+                    "Section Two: 4 Answer 4"
+                ]
+            }]
+    },
 
-    "1990's": [
-
-    ]
+    sectionThree: {
+        answers: [
+            {
+                one: ["yes",
+                    "no",
+                    "Breakfast at Tiffany's",
+                    "cigarette Holder"]
+            },
+            {
+                two: ["Section Three: 2 Answer 1",
+                    "Section Three: 2 Answer 2",
+                    "Section Three: 2 Answer 3",
+                    "Section Three: 2 Answer 4"
+                ]
+            },
+            {
+                three: ["Section Three: 3 Answer 1",
+                    "Section Three: 3 Answer 2",
+                    "Section Three: 3 Answer 3",
+                    "Section Three: 3 Answer 4"
+                ]
+            },
+            {
+                four: ["Section Three: 4 Answer 1",
+                    "Section Three: 4 Answer 2",
+                    "Section Three: 4 Answer 3",
+                    "Section Three: 4 Answer 4"
+                ]
+            }]
+    }
 }
 function fixCanvas() {
 
     $('canvas').detectPixelRatio(function (ratio) {
-        console.log(ratio)
+
         $('canvas').css({
             height: "80vh",
             width: "75vw"
@@ -432,7 +483,7 @@ var roundInProgress = false;
 var currentCanvasText = [];
 function drawQuestion(qnumber, fs, fx, fy) {
     fixCanvas();
-    console.log(canvasText)
+
     for (x = 0; x < canvasText.length; x++) {
         if (x != 0) {
             $('canvas').drawText({
@@ -463,7 +514,7 @@ function drawQuestion(qnumber, fs, fx, fy) {
 
 }
 function canvasView(one, two, three, four) {
-    console.log(one, two, three, four)
+
     newText = [];
     newText = [currentCanvasText.join(""), one, two, three, four]
     return (currentCanvasText.join("") + " " + one + " " + two + " " + three + " " + four)
@@ -471,9 +522,18 @@ function canvasView(one, two, three, four) {
 
 }
 // need the answers for this portion //
-var answerData = triviaAnswers.sectionOne.answers
+var answerData = [];
+
+
 var newText = [];
 function createText(question) {
+    if (roundNumber === 1) {
+        answerData = triviaAnswers.sectionOne.answers
+    } else if (roundNumber === 2) {
+        answerData = triviaAnswers.sectionTwo.answers
+    } else if (roundNumber === 3) {
+        answerData = triviaAnswers.sectionThree.answers
+    }
     var answers = [];
     switch (question) {
         case "one":
@@ -498,6 +558,14 @@ function createText(question) {
                 answerData[2].three[1],
                 answerData[2].three[2],
                 answerData[2].three[3]
+            ]
+            break;
+        case "four":
+            var answers = [
+                answerData[3].four[0],
+                answerData[3].four[1],
+                answerData[3].four[2],
+                answerData[3].four[3]
             ]
             break;
     }
@@ -527,6 +595,13 @@ $("#startButton").on("click", function () {
 
             fixCanvas();
         }
+        if (roundNumber === 3) {
+
+            $("#headerOne").text(triviaQs.sections.nineties.header);
+            var currentQs = triviaQuestions[2];
+
+            fixCanvas();
+        }
         roundInProgress = true;
         $("#startButton").text("Next Question")
     }
@@ -545,7 +620,7 @@ $("#startButton").on("click", function () {
                     questionNumber++;
                     break;
                 case 2:
-                    console.log(currentQs)
+                    console.log(questionNumber)
                     currentCanvasText = [];
                     currentCanvasText.push(triviaQuestions[0][1])
                     $('canvas').clearCanvas();
@@ -580,7 +655,99 @@ $("#startButton").on("click", function () {
                     break;
             }
         } else if (roundNumber === 2) {
-
+            switch (questionNumber) {
+                case 1:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[1][0])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("one");
+                    canvasText = newText;
+                    drawQuestion(0, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 2:
+                    console.log(currentQs)
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[1][1])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("two");
+                    canvasText = newText;
+                    drawQuestion(1, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 3:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[1][2])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("three");
+                    canvasText = newText;
+                    drawQuestion(2, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 4:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[1][3])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("four");
+                    canvasText = newText;
+                    drawQuestion(3, 5, 150, 20)
+                    questionNumber = 1;
+                    $("#startButton").text("Next Round")
+                    roundInProgress = false;
+                    roundNumber++;
+                    break;
+            }
+        } else if (roundNumber === 3) {
+            switch (questionNumber) {
+                case 1:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[2][0])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("one");
+                    canvasText = newText;
+                    drawQuestion(0, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 2:
+                    console.log(currentQs)
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[2][1])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("two");
+                    canvasText = newText;
+                    drawQuestion(1, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 3:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[2][2])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("three");
+                    canvasText = newText;
+                    drawQuestion(2, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 4:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[2][3])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("four");
+                    canvasText = newText;
+                    drawQuestion(3, 5, 150, 20)
+                    questionNumber = 1;
+                    $("#startButton").text("Next Round")
+                    roundInProgress = false;
+                    roundNumber++;
+                    break;
+            }
         }
     }
 
