@@ -59,7 +59,7 @@ var objectstoadd = {
             row: $("<div>", { id: "sideRowSecond", class: "row sideRow" }),
             col: {
                 self: $("<div>", { id: "buttonCol", class: "col m12" }),
-                button: $("<button>", { id: "button", class: "btn black white-text" }),
+                button: $("<button>", { id: "startButton", class: "btn black white-text" }),
             }
         },
 
@@ -193,7 +193,7 @@ for (section = 0; section < 6; section++) {
                 borderRadius: "10px",
             })
             $("#buttonCol").append(button)
-            $("#button").text("I'm a button")
+            $("#startButton").text("Start")
             break;
         case 4:
             var container = $(".container")
@@ -248,7 +248,7 @@ for (section = 0; section < 6; section++) {
             $("#myCanvas").css({
                 height: "80vh",
                 width: "60vw",
-                backgroundColor: "blue",
+                backgroundColor: "rgba(250, 250, 250, 0.6)",
                 border: "none !important",
                 padding: "none !important",
                 display: "flex",
@@ -257,22 +257,17 @@ for (section = 0; section < 6; section++) {
                 marginTop: "10vh",
                 borderRadius: "20px",
                 zIndex: "2"
-            }),
-                $("#mainWrap").append(button);
+            })
+
+            $("#mainWrap").append(button);
             $("#showSideButton").css({
                 position: "fixed",
                 top: "0",
                 left: "25vw",
                 zIndex: "3",
             }),
-                $("#showSideButton").text("Toggle Sidebar View");
-
+                $("#showSideButton").text("Toggle Sidebar");
             break;
-        case 6:
-
-            break;
-
-
     }
     var SBSfunction = $("#showSideButton")
     var SBSfunctionMainwrap = objectstoadd.sections.main.self
@@ -290,9 +285,9 @@ for (section = 0; section < 6; section++) {
                 width: "75vw",
             }, 500, "linear")
             sideSlide = true;
+
         }
         else if (sideSlide) {
-
             $("#sidebar").animate({
                 width: "25vw"
             }, 500, "linear")
@@ -303,7 +298,306 @@ for (section = 0; section < 6; section++) {
             }, 500, "linear")
             $("#showSideButton").animate({ left: "25vw" }, 500, "linear")
             sideSlide = false;
+
         }
     })
 }
 // Page Loaded //
+//Start adding Function //
+var myCanvas = $("#myCanvas")
+var canvasText = ""
+
+
+$("#showSideButton").on("click", function () {
+    if (sideSlide === true) {
+        $('canvas').detectPixelRatio(function (ratio) {
+            console.log(ratio)
+            $('canvas').css({
+                height: "80vh",
+                width: "60vw"
+            })
+        });
+        $('canvas').scaleCanvas({
+            x: "60vw",
+            y: "80vh",
+            scaleX: 1, scaleY: 1
+        })
+
+    } else {
+        $('canvas').detectPixelRatio(function (ratio) {
+            console.log(ratio)
+            $('canvas').css({
+                height: "80vh",
+                width: "75vw"
+            })
+        });
+        $('canvas').scaleCanvas({
+            x: "75vw",
+            y: "80vh",
+            scaleX: 1, scaleY: 1
+        })
+    }
+})
+
+
+// Game function work //
+var triviaQs = {
+
+    sections: {
+        thirtiesToFifties: {
+            header: "1930's - 1950's Fashion",
+            questions: ["In the 1930's, what could $25 dollars get you at a men's clothing store?",
+                "Question 2", "Question 3", "Question 4"]
+        },
+        sixtiesToEighties: {
+            header: "1960's to 1980's",
+            questions: ["Was Audrey Hepburn the Baddest Bitch in the land?", "", "", ""],
+        },
+        nineties: {
+            header: "The 1990's",
+            questions: ["Was Limp Bizkit at the Forefront of style and culture?", "", "", ""],
+        }
+
+    }
+}
+var triviaAnswers = {
+    sectionOne: {
+        answers: [
+            // thinking these will be arrays of four possible answers that we will"""" link to
+            // the  Colored Side Buttons"""" and """"Display on the canvas"""", also we will """""put the answers through a randomizing process""""" 
+            // so they display differently every time the question is posed
+            {
+                one: ["suit, a hat, 3 pairs of socks, 2 dress shirts, a tie, a pair of shoes",
+                    "suit, hat, cane, matching shoes",
+                    "2 dress shirts, a tie, handkerchief, gloves, hair gel",
+                    "Chanel's first ever production Double Breasted Peacock sport coat"
+                ]
+            },
+            {
+                two: ["2 Answer 1",
+                    "2 Answer 2",
+                    "2 Answer 3",
+                    "2 Answer 4"
+                ]
+            },
+            {
+                three: ["3 Answer 1",
+                    "3 Answer 2",
+                    "3 Answer 3",
+                    "3 Answer 4"
+                ]
+            },
+            {
+                four: ["4 Answer 1",
+                    "4 Answer 2",
+                    "4 Answer 3",
+                    "4 Answer 4"
+                ]
+            }
+        ]
+    },
+
+    "1960's to 1980's": [
+        { one: [] },
+        { two: [] },
+        { three: [] },
+        { four: [] }
+    ],
+
+    "1990's": [
+
+    ]
+}
+function fixCanvas() {
+
+    $('canvas').detectPixelRatio(function (ratio) {
+        console.log(ratio)
+        $('canvas').css({
+            height: "80vh",
+            width: "75vw"
+        })
+    });
+    $('canvas').scaleCanvas({
+        x: "75vw",
+        y: "80vh",
+        scaleX: 1, scaleY: 1
+    })
+}
+
+var roundNumber = 1;
+var questionNumber = 1;
+var startClick = true;
+var triviaQuestions = [(triviaQs.sections.thirtiesToFifties.questions), (triviaQs.sections.sixtiesToEighties.questions), (triviaQs.sections.nineties.questions)]
+var roundInProgress = false;
+var currentCanvasText = [];
+function drawQuestion(qnumber, fs, fx, fy) {
+    fixCanvas();
+    console.log(canvasText)
+    for (x = 0; x < canvasText.length; x++) {
+        if (x != 0) {
+            $('canvas').drawText({
+                fillStyle: 'black',
+                strokeStyle: 'black',
+                strokeWidth: 0,
+                x: fx, y: (fy + (20 * x)),
+                fontSize: fs,
+                fontFamily: 'Verdana, sans-serif',
+                text: canvasText[x],
+                scaleX: 1,
+                scaleY: 1,
+            })
+        } else {
+            $('canvas').drawText({
+                fillStyle: 'black',
+                strokeStyle: 'black',
+                strokeWidth: 0,
+                x: fx, y: (fy + (20 * x)),
+                fontSize: (fs + 3),
+                fontFamily: 'Verdana, sans-serif',
+                text: canvasText[x],
+                scaleX: 1,
+                scaleY: 1,
+            })
+        }
+    }
+
+}
+function canvasView(one, two, three, four) {
+    console.log(one, two, three, four)
+    newText = [];
+    newText = [currentCanvasText.join(""), one, two, three, four]
+    return (currentCanvasText.join("") + " " + one + " " + two + " " + three + " " + four)
+
+
+}
+// need the answers for this portion //
+var answerData = triviaAnswers.sectionOne.answers
+var newText = [];
+function createText(question) {
+    var answers = [];
+    switch (question) {
+        case "one":
+            var answers = [
+                answerData[0].one[0],
+                answerData[0].one[1],
+                answerData[0].one[2],
+                answerData[0].one[3]
+            ]
+            break;
+        case "two":
+            var answers = [
+                answerData[1].two[0],
+                answerData[1].two[1],
+                answerData[1].two[2],
+                answerData[1].two[3]
+            ]
+            break;
+        case "three":
+            var answers = [
+                answerData[2].three[0],
+                answerData[2].three[1],
+                answerData[2].three[2],
+                answerData[2].three[3]
+            ]
+            break;
+    }
+    var one = ("1: " + answers[0])
+    var two = ("2: " + answers[1])
+    var three = ("3: " + answers[2])
+    var four = ("4: " + answers[3])
+    var toParse = (one + " <br> " + two + " <br> " + three + " <br> " + four)
+    // var toHtml = $.parseHTML(toParse)
+    return console.log(canvasView(one, two, three, four))
+
+}
+
+$("#startButton").on("click", function () {
+
+    if (!roundInProgress) {
+        if (roundNumber === 1) {
+            var currentQs = triviaQuestions[0];
+            $("#headerOne").text(triviaQs.sections.thirtiesToFifties.header)
+        }
+
+        // saved older one in function below //
+        if (roundNumber === 2) {
+
+            $("#headerOne").text(triviaQs.sections.sixtiesToEighties.header);
+            var currentQs = triviaQuestions[1];
+
+            fixCanvas();
+        }
+        roundInProgress = true;
+        $("#startButton").text("Next Question")
+    }
+    if (roundInProgress) {
+        if (roundNumber === 1) {
+            //use triviaQuestions[0][n]
+            switch (questionNumber) {
+                case 1:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[0][0])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("one");
+                    canvasText = newText;
+                    drawQuestion(0, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 2:
+                    console.log(currentQs)
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[0][1])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("two");
+                    canvasText = newText;
+                    drawQuestion(1, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 3:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[0][2])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("three");
+                    canvasText = newText;
+                    drawQuestion(2, 5, 150, 20)
+                    questionNumber++;
+                    break;
+                case 4:
+                    currentCanvasText = [];
+                    currentCanvasText.push(triviaQuestions[0][3])
+                    $('canvas').clearCanvas();
+                    newText = [];
+                    createText("four");
+                    canvasText = newText;
+                    drawQuestion(3, 5, 150, 20)
+                    questionNumber = 1;
+                    $("#startButton").text("Next Round")
+                    roundInProgress = false;
+                    roundNumber++;
+                    break;
+            }
+        } else if (roundNumber === 2) {
+
+        }
+    }
+
+    createText();
+})
+
+// While Round is going: //
+
+// game function work end //
+// building canvas text below //
+
+
+
+
+
+
+
+// Canvas Work //
+
+// End Canvas Work //
