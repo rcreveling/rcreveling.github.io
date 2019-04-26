@@ -742,11 +742,25 @@ $("#startButton").on("click", function () {
                     createText("four");
                     canvasText = newText;
                     drawQuestion(3, 5, 150, 20)
-                    questionNumber = 1;
-                    $("#startButton").text("Next Round")
-                    roundInProgress = false;
-                    roundNumber++;
+                    questionNumber++;
+                    $("#startButton").text("Result")
+
+
                     break;
+                case 5:
+                    currentCanvasText = [];
+                    $('canvas').clearCanvas();
+                    // Draw Result Board //
+                    $("#startButton").text("Retry!")
+                    questionNumber++;
+                    break;
+                case 6:
+                    $("#startButton").text("Start")
+                    questionNumber = 1;
+                    roundNumber = 1;
+                    roundInProgress = false;
+                    break;
+
             }
         }
     }
