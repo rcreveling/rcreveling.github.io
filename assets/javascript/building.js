@@ -1,47 +1,23 @@
 var objectstoadd = {
     sections: {
         main: {
-            self: $("<div>", { id: "", class: "mainWrap" }),
-            styling: {
-                width: "100vw",
-                borderLeft: "none",
-                right: "0",
-                marginLeft: "0vw",
-                boxShadow: "0 0 -5px - 5px black",
-                top: "0",
-                height: "100vh",
-                background1: "url(assets/images/background-beverage-brown-414645.jpg)",
-                backgroundSize: "100vw auto",
-                filter: "progid: DXImageTransform.Microsoft.gradient(startColorstr = '#f1043b', endColorstr = '#940023', GradientType = 1)",
-                position: "absolute",
-                zIndex: "-1",
-                display: "flex",
-            },
+            self: $("<div>", { id: "mainWrap", class: "mainWrap" }),
             canvas: $("<canvas>", { id: "myCanvas", class: "myCanvas" }),
-            canvasStyling: {
-                height: "80vh",
-                width: "60vw",
-                backgroundColor: "blue",
-                border: "none !important",
-                padding: "none !important",
-                display: "inline-flex",
-                marginLeft: "30vw",
-                marginTop: "10vh",
-                borderRadius: "20px",
-            }
         },
         mainContent: {
             button: $("<button>", { id: "showSideButton", class: "btn" }),
             div1: $('<div>', { class: 'mainDiv', id: 'mainDiv' }),
             div2: $('<canvas>', { class: 'mainCanvas', id: '' }),
         },
-        sidebar: {
-            self: $("#sidebar"),
-            sideSlideButton: $("#sideSlide"),
+        sidebarBtn: {
+            self: $("<button>", { id: "showSideButton", class: "btn sideBtn" }),
             styling: {
-
-            }
-        }
+                position: "fixed",
+                top: "0",
+                left: "0",
+                zIndex: "5",
+            },
+        },
     },
     side: {
         id: $("#sidebar"),
@@ -151,7 +127,7 @@ var rowThree = side.rowThree;
 var htmlBody = side.htmlBody;
 
 
-for (section = 0; section < 5; section++) {
+for (section = 0; section < 6; section++) {
     switch (section) {
         case 0:
             console.log(side.self)
@@ -164,6 +140,7 @@ for (section = 0; section < 5; section++) {
                 height: "100vh",
                 backgroundColor: "rgba(46, 86, 131, 0.8)",
                 position: "relative",
+                zIndex: "2",
             });
             break;
         case 1:
@@ -244,8 +221,77 @@ for (section = 0; section < 5; section++) {
                 paddingBottom: "1.5vh",
                 borderRadius: "10px",
             })
+            break;
+        case 5:
+            var sections = objectstoadd.sections;
+            var main = sections.main.self;
+            var mainContent = sections.mainContent;
+            var canvas = sections.main.canvas;
+            var button = sections.sidebarBtn.self;
+            $(".mainWrap").append(main)
+            $("#mainWrap").css({
+                width: "100vw",
+                borderLeft: "none",
+                right: "0",
+                marginLeft: "0vw",
+                boxShadow: "0 0 -5px - 5px black",
+                top: "0",
+                height: "100vh",
+                background: "url(assets/images/background-beverage-brown-414645.jpg)",
+                backgroundSize: "100vw auto",
+                filter: "progid: DXImageTransform.Microsoft.gradient(startColorstr = '#f1043b', endColorstr = '#940023', GradientType = 1)",
+                position: "absolute",
+                zIndex: "1",
+                display: "flex",
+            }),
+                $("#mainWrap").append(canvas);
+            $("#myCanvas").css({
+                height: "80vh",
+                width: "60vw",
+                backgroundColor: "blue",
+                border: "none !important",
+                padding: "none !important",
+                display: "inline-flex",
+                marginLeft: "30vw",
+                marginTop: "10vh",
+                borderRadius: "20px",
+                zIndex: "2"
+            }),
+                $("#mainWrap").append(button);
+            $("#showSideButton").css({
+                position: "fixed",
+                top: "0",
+                left: "25vw",
+                zIndex: "3",
+            }),
+                $("#showSideButton").text("Toggle Sidebar View");
+
+            break;
+        case 6:
+
+            break;
+
 
     }
+    var SBSfunction = $("#showSideButton")
+    var SBSfunctionMainwrap = objectstoadd.sections.main.self
+    var sideSlide = false;
+    SBSfunction.on("click", function () {
+        if (!sideSlide) {
+            $("#sidebar").slideToggle("slow")
+            $("#sidebar").css({
+                width: "25vw",
+                borderLeft: "none"
+            })
+            $("#showSideButton").animate({ left: "0" }, 1000, "linear")
+            sideSlide = true;
+        }
+        else if (sideSlide) {
+            $("#sidebar").slideToggle("slow")
+            console.log("eh?")
+            $("#showSideButton").animate({ left: "25vw" }, 1000, "linear")
+            sideSlide = false;
+        }
+    })
 }
-
-// Load Main //
+// Page Loaded //
