@@ -251,8 +251,9 @@ for (section = 0; section < 6; section++) {
                 backgroundColor: "blue",
                 border: "none !important",
                 padding: "none !important",
-                display: "inline-flex",
+                display: "flex",
                 marginLeft: "30vw",
+                marginRight: "10vw",
                 marginTop: "10vh",
                 borderRadius: "20px",
                 zIndex: "2"
@@ -278,18 +279,29 @@ for (section = 0; section < 6; section++) {
     var sideSlide = false;
     SBSfunction.on("click", function () {
         if (!sideSlide) {
-            $("#sidebar").slideToggle("slow")
-            $("#sidebar").css({
-                width: "25vw",
-                borderLeft: "none"
-            })
-            $("#showSideButton").animate({ left: "0" }, 1000, "linear")
+
+            $("#sidebar").animate({
+                width: "10vw"
+            }, 500, "linear")
+            $("#showSideButton").animate({ left: "10vw" }, 500, "linear")
+            $("#myCanvas").animate({
+                marginLeft: "15vw",
+                marginRight: "10vw",
+                width: "75vw",
+            }, 500, "linear")
             sideSlide = true;
         }
         else if (sideSlide) {
-            $("#sidebar").slideToggle("slow")
-            console.log("eh?")
-            $("#showSideButton").animate({ left: "25vw" }, 1000, "linear")
+
+            $("#sidebar").animate({
+                width: "25vw"
+            }, 500, "linear")
+            $("#myCanvas").animate({
+                marginLeft: "30vw",
+                marginRight: "10vw",
+                width: "60vw",
+            }, 500, "linear")
+            $("#showSideButton").animate({ left: "25vw" }, 500, "linear")
             sideSlide = false;
         }
     })
