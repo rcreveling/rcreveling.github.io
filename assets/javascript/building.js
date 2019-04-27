@@ -66,25 +66,25 @@ var objectstoadd = {
         rowThree: {
             row: $("<div>", { id: "sideRowThird", class: "row sideRow" }),
             col: {
-                dud: $("<div>"),
-                self: $("<div>", { id: "columnOne", class: "btn col m3 sidebarColors red" }),
+
+                self: $("<div>", { id: "One", class: "btn col m3 sidebarColors red" }),
 
 
                 header: $("<h3>"),
             },
             colOne: {
-                dud: $("<div>"),
-                self: $("<div>", { id: "columnTwo", class: "btn col m3 sidebarColors green" }),
+
+                self: $("<div>", { id: "Two", class: "btn col m3 sidebarColors green" }),
 
             },
             colTwo: {
-                dud: $("<div>"),
-                self: $("<div>", { id: "columnThree", class: "btn col m3 sidebarColors blue" }),
+
+                self: $("<div>", { id: "Three", class: "btn col m3 sidebarColors blue" }),
 
             },
             colThree: {
-                dud: $("<div>"),
-                self: $("<div>", { id: "columnFour", class: "btn col m3 sidebarColors yellow" }),
+
+                self: $("<div>", { id: "Four", class: "btn col m3 sidebarColors yellow" }),
 
             },
         },
@@ -221,6 +221,12 @@ for (section = 0; section < 6; section++) {
                 paddingBottom: "1.5vh",
                 borderRadius: "10px",
             })
+            for (x = 0; x < 4; x++) {
+                var buttonClass = [$(".red"), $(".green"), $(".blue"), $(".yellow")]
+                var buttonText = ["1", "2", "3", "4"]
+                var color = buttonClass[x];
+                color.text(buttonText[x])
+            }
             break;
         case 5:
             var sections = objectstoadd.sections;
@@ -306,56 +312,29 @@ for (section = 0; section < 6; section++) {
 //Start adding Function //
 var myCanvas = $("#myCanvas")
 var canvasText = ""
-
-
-$("#showSideButton").on("click", function () {
-    if (sideSlide === true) {
-        $('canvas').detectPixelRatio(function (ratio) {
-            console.log(ratio)
-            $('canvas').css({
-                height: "80vh",
-                width: "60vw"
-            })
-        });
-        $('canvas').scaleCanvas({
-            x: "60vw",
-            y: "80vh",
-            scaleX: 1, scaleY: 1
-        })
-
-    } else {
-        $('canvas').detectPixelRatio(function (ratio) {
-            console.log(ratio)
-            $('canvas').css({
-                height: "80vh",
-                width: "75vw"
-            })
-        });
-        $('canvas').scaleCanvas({
-            x: "75vw",
-            y: "80vh",
-            scaleX: 1, scaleY: 1
-        })
-    }
-})
-
-
-// Game function //
 var triviaQs = {
 
     sections: {
         thirtiesToFifties: {
             header: "1930's - 1950's Trivia",
             questions: ["In the 1930's, what could $25 dollars get you at a men's clothing store?",
-                "Question 2", "Question 3", "Question 4"]
+                "Christian Dior's 1947 line including 'Huit' and 'Corolle' was called what?",
+                "Entering the fifties, what changed the price and look of fashion forever?",
+                "Post WWII fashion blossomed and evolved in what city?"]
         },
         sixtiesToEighties: {
             header: "1960's to 1980's Trivia",
-            questions: ["Was Audrey Hepburn the Baddest Bitch in the land?", "Question 2", "Question 3", "Question 4"],
+            questions: ["What pet did Audrey Hepburn famously keep?",
+                "What was the hottest Video Game of 1979?",
+                "What was the Beatles' goodbye album?",
+                "'When you put it on, something happens.' is attributed to which brand?"],
         },
         nineties: {
-            header: "The 1990's Trivia",
-            questions: ["Was Limp Bizkit at the Forefront of style and culture?", "Question 2", "Question 3", "Question 4"],
+            header: "...1990's Trivia",
+            questions: ["Was Limp Bizkit at the Forefront of style and culture?",
+                "My ___ Little Pill was Alanis Morissette's only achievement",
+                "",
+                "Question 4"],
         }
 
     }
@@ -367,31 +346,31 @@ var triviaAnswers = {
             // the  Colored Side Buttons"""" and """"Display on the canvas"""", also we will """""put the answers through a randomizing process""""" 
             // so they display differently every time the question is posed
             {
-                one: ["suit, a hat, 3 pairs of socks, 2 dress shirts, a tie, a pair of shoes",
-                    "suit, hat, cane, matching shoes",
+                one: ["Suit, a hat, 3 pairs of socks, 2 dress shirts, a tie, a pair of shoes",
+                    "Suit, hat, cane, matching shoes",
                     "2 dress shirts, a tie, handkerchief, gloves, hair gel",
                     "Chanel's first ever production Double Breasted Peacock sport coat"
                 ]
             },
             {
-                two: ["Section One: 2 Answer 1",
-                    "Section One: 2 Answer 2",
-                    "Section One: 2 Answer 3",
-                    "Section One: 2 Answer 4"
+                two: ["The Style",
+                    "The New Look",
+                    "Mordern Chique",
+                    "The Fashion Revolution"
                 ]
             },
             {
-                three: ["Section One: 3 Answer 1",
-                    "Section One: 3 Answer 2",
-                    "Section One: 3 Answer 3",
-                    "Section One: 3 Answer 4"
+                three: ["Bedazzling",
+                    "Canadian Hemp Fabric",
+                    "Artifically blended Fabrics",
+                    "Military Style Wool (Roswell Was a Coverup)"
                 ]
             },
             {
-                four: ["Section One: 4 Answer 1",
-                    "Section One: 4 Answer 2",
-                    "Section One: 4 Answer 3",
-                    "Section One: 4 Answer 4"
+                four: ["Berlin",
+                    "Paris",
+                    "London",
+                    "New York City"
                 ]
             }
         ]
@@ -400,30 +379,30 @@ var triviaAnswers = {
     sectionTwo: {
         answers: [
             {
-                one: ["yes",
-                    "no",
-                    "Breakfast at Tiffany's",
-                    "cigarette Holder"]
+                one: ["A German Shepard named Rosco",
+                    "A Deer named Pippin",
+                    "A Tigress named Lola",
+                    "A Parrot named Pretty"]
             },
             {
-                two: ["Section Two: 2 Answer 1",
-                    "Section Two: 2 Answer 2",
-                    "Section Two: 2 Answer 3",
-                    "Section Two: 2 Answer 4"
+                two: ["The Oregon Trail",
+                    "Space Invaders",
+                    "Super Hi-Res Chess",
+                    "Beyond the Tesseract"
                 ]
             },
             {
-                three: ["Section Two: 3 Answer 1",
-                    "Section Two: 3 Answer 2",
-                    "Section Two: 3 Answer 3",
-                    "Section Two: 3 Answer 4"
+                three: ["Yesterday and Today",
+                    "The Beatles",
+                    "Let it Be",
+                    "My Bonnie/The Saints"
                 ]
             },
             {
-                four: ["Section Two: 4 Answer 1",
-                    "Section Two: 4 Answer 2",
-                    "Section Two: 4 Answer 3",
-                    "Section Two: 4 Answer 4"
+                four: ["Ralph Lauren",
+                    "Starter",
+                    "Chess King",
+                    "Members Only"
                 ]
             }]
     },
@@ -431,16 +410,16 @@ var triviaAnswers = {
     sectionThree: {
         answers: [
             {
-                one: ["yes",
-                    "no",
-                    "Breakfast at Tiffany's",
-                    "cigarette Holder"]
+                one: ["yes..?",
+                    "no.",
+                    "Don't ask stupid questions, punk",
+                    "He did it all for the nookie"]
             },
             {
-                two: ["Section Three: 2 Answer 1",
-                    "Section Three: 2 Answer 2",
-                    "Section Three: 2 Answer 3",
-                    "Section Three: 2 Answer 4"
+                two: ["Salty",
+                    "Red",
+                    "Blue",
+                    "Big"
                 ]
             },
             {
@@ -459,6 +438,52 @@ var triviaAnswers = {
             }]
     }
 }
+
+
+
+$("#showSideButton").on("click", function () {
+    if (sideSlide === true) {
+        $('canvas').detectPixelRatio(function (ratio) {
+            console.log(ratio)
+            $('canvas').css({
+                height: "80vh",
+                width: "60vw"
+            })
+        });
+        $('canvas').scaleCanvas({
+            x: "60vw",
+            y: "80vh",
+            scaleX: 1, scaleY: 1
+        })
+        $("#headerOne").css({ fontSize: "2em", height: "17vh" })
+        if (roundInProgress) {
+            $("#startButton").text("Next")
+        }
+
+    } else {
+        $('canvas').detectPixelRatio(function (ratio) {
+            console.log(ratio)
+            $('canvas').css({
+                height: "80vh",
+                width: "75vw"
+            })
+        });
+        $('canvas').scaleCanvas({
+            x: "75vw",
+            y: "80vh",
+            scaleX: 1, scaleY: 1
+        })
+        $("#headerOne").css({ fontSize: "4em", height: "17vh" })
+        if (roundInProgress) {
+            $("#startButton").text("Next Question")
+        }
+    }
+})
+
+
+// Game function //
+
+// fixCanvas helper function used often //
 function fixCanvas() {
 
     $('canvas').detectPixelRatio(function (ratio) {
@@ -474,10 +499,9 @@ function fixCanvas() {
         scaleX: 1, scaleY: 1
     })
 }
-
+// canvas variables then canvas functions to draw questions and answers //
 var roundNumber = 1;
 var questionNumber = 1;
-var startClick = true;
 var triviaQuestions = [(triviaQs.sections.thirtiesToFifties.questions), (triviaQs.sections.sixtiesToEighties.questions), (triviaQs.sections.nineties.questions)]
 var roundInProgress = false;
 var currentCanvasText = [];
@@ -489,7 +513,7 @@ function drawQuestion(qnumber, fs, fx, fy) {
             $('canvas').drawText({
                 fillStyle: 'black',
                 strokeStyle: 'black',
-                strokeWidth: 0,
+                strokeWidth: 0.5,
                 x: fx, y: (fy + (20 * x)),
                 fontSize: fs,
                 fontFamily: 'Verdana, sans-serif',
@@ -501,7 +525,7 @@ function drawQuestion(qnumber, fs, fx, fy) {
             $('canvas').drawText({
                 fillStyle: 'black',
                 strokeStyle: 'black',
-                strokeWidth: 0,
+                strokeWidth: 0.5,
                 x: fx, y: (fy + (20 * x)),
                 fontSize: (fs + 3),
                 fontFamily: 'Verdana, sans-serif',
@@ -521,11 +545,142 @@ function canvasView(one, two, three, four) {
 
 
 }
+// Answer Checker function //
+function answerHelper(a, b, c, d) {
+    var correct = [a, b, c, d]
+    console.log(correct)
+}
+function answerChecker(currentThis) {
+    var thisOne;
+    var thisTwo;
+    var thisThree;
+    var thisFour;
+    var thisAnswer;
+
+    switch (roundNumber) {
+        case 1:
+            switch (questionNumber) {
+                case 1:
+                    console.log(questionNumber)
+                    thisOne = currentThis[0].one[0]
+                    thisTwo = currentThis[0].one[1]
+                    thisThree = currentThis[0].one[2]
+                    thisFour = currentThis[0].one[3]
+                    thisAnswer = 1;
+                    console.log(currentThis[0])
+                    break;
+                case 2:
+                    thisOne = currentThis[1].two[0];
+                    thisTwo = currentThis[1].two[1];
+                    thisThree = currentThis[1].two[2];
+                    thisFour = currentThis[1].two[3];
+                    thisAnswer = 2;
+                    console.log(currentThis[1])
+                    break;
+                case 3:
+                    thisOne = currentThis[2].three[0];
+                    thisTwo = currentThis[2].three[1];
+                    thisThree = currentThis[2].three[2];
+                    thisFour = currentThis[2].three[3];
+                    thisAnswer = 3;
+                    console.log(currentThis[2])
+                    break;
+                case 4:
+                    thisOne = currentThis[3].four[0];
+                    thisTwo = currentThis[3].four[1];
+                    thisThree = currentThis[3].four[2];
+                    thisFour = currentThis[3].four[3];
+                    thisAnswer = 2;
+                    console.log(currentThis[3])
+                    break;
+            }
+            answerHelper(thisOne, thisTwo, thisThree, thisFour)
+            break;
+        case 2:
+
+            switch (questionNumber) {
+                case 1:
+                    thisOne = currentThis[0].one[0]
+                    thisTwo = currentThis[0].one[1]
+                    thisThree = currentThis[0].one[2]
+                    thisFour = currentThis[0].one[3]
+                    thisAnswer = 2;
+                    console.log(currentThis[0])
+                    break;
+                case 2:
+
+                    thisOne = currentThis[1].two[0];
+                    thisTwo = currentThis[1].two[1];
+                    thisThree = currentThis[1].two[2];
+                    thisFour = currentThis[1].two[3];
+                    thisAnswer = 2;
+                    console.log(currentThis[1])
+                    break;
+                case 3:
+                    thisOne = currentThis[2].three[0];
+                    thisTwo = currentThis[2].three[1];
+                    thisThree = currentThis[2].three[2];
+                    thisFour = currentThis[2].three[3];
+                    thisAnswer = 3;
+                    console.log(currentThis[2])
+                    break;
+                case 4:
+                    thisOne = currentThis[3].four[0];
+                    thisTwo = currentThis[3].four[1];
+                    thisThree = currentThis[3].four[2];
+                    thisFour = currentThis[3].four[3];
+                    thisAnswer = 4;
+                    console.log(currentThis[3])
+                    break;
+            }
+            answerHelper(thisOne, thisTwo, thisThree, thisFour)
+            break;
+        case 3:
+            switch (questionNumber) {
+                case 1:
+                    thisOne = currentThis[0].one[0]
+                    thisTwo = currentThis[0].one[1]
+                    thisThree = currentThis[0].one[2]
+                    thisFour = currentThis[0].one[3]
+                    thisAnswer = 4;
+                    console.log(currentThis[0])
+                    break;
+                case 2:
+
+                    thisOne = currentThis[1].two[0];
+                    thisTwo = currentThis[1].two[1];
+                    thisThree = currentThis[1].two[2];
+                    thisFour = currentThis[1].two[3];
+                    thisAnswer = 3;
+                    console.log(currentThis[1])
+                    break;
+                case 3:
+                    thisOne = currentThis[2].three[0];
+                    thisTwo = currentThis[2].three[1];
+                    thisThree = currentThis[2].three[2];
+                    thisFour = currentThis[2].three[3];
+                    thisAnswer = 1;
+                    console.log(currentThis[2])
+                    break;
+                case 4:
+                    thisOne = currentThis[3].four[0];
+                    thisTwo = currentThis[3].four[1];
+                    thisThree = currentThis[3].four[2];
+                    thisFour = currentThis[3].four[3];
+                    thisAnswer = 1;
+                    console.log(currentThis[3])
+                    break;
+            }
+            answerHelper(thisOne, thisTwo, thisThree, thisFour)
+            break;
+
+    }
+}
+
 // need the answers for this portion //
 var answerData = [];
-
-
 var newText = [];
+
 function createText(question) {
     if (roundNumber === 1) {
         answerData = triviaAnswers.sectionOne.answers
@@ -573,17 +728,19 @@ function createText(question) {
     var two = ("2: " + answers[1])
     var three = ("3: " + answers[2])
     var four = ("4: " + answers[3])
-    var toParse = (one + " <br> " + two + " <br> " + three + " <br> " + four)
+    // var toParse = (one + " <br> " + two + " <br> " + three + " <br> " + four)
     // var toHtml = $.parseHTML(toParse)
-    return console.log(canvasView(one, two, three, four))
+    return canvasView(one, two, three, four)
 
 }
+
 
 $("#startButton").on("click", function () {
 
     if (!roundInProgress) {
         if (roundNumber === 1) {
             var currentQs = triviaQuestions[0];
+
             $("#headerOne").text(triviaQs.sections.thirtiesToFifties.header)
         }
 
@@ -608,6 +765,7 @@ $("#startButton").on("click", function () {
     if (roundInProgress) {
         if (roundNumber === 1) {
             //use triviaQuestions[0][n]
+
             switch (questionNumber) {
                 case 1:
                     currentCanvasText = [];
@@ -617,6 +775,7 @@ $("#startButton").on("click", function () {
                     createText("one");
                     canvasText = newText;
                     drawQuestion(0, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionOne.answers);
                     questionNumber++;
                     break;
                 case 2:
@@ -628,6 +787,7 @@ $("#startButton").on("click", function () {
                     createText("two");
                     canvasText = newText;
                     drawQuestion(1, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionOne.answers);
                     questionNumber++;
                     break;
                 case 3:
@@ -638,6 +798,7 @@ $("#startButton").on("click", function () {
                     createText("three");
                     canvasText = newText;
                     drawQuestion(2, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionOne.answers);
                     questionNumber++;
                     break;
                 case 4:
@@ -648,10 +809,11 @@ $("#startButton").on("click", function () {
                     createText("four");
                     canvasText = newText;
                     drawQuestion(3, 5, 150, 20)
-                    questionNumber = 1;
                     $("#startButton").text("Next Round")
                     roundInProgress = false;
+                    answerChecker(triviaAnswers.sectionOne.answers);
                     roundNumber++;
+                    questionNumber = 1;
                     break;
             }
         } else if (roundNumber === 2) {
@@ -664,7 +826,9 @@ $("#startButton").on("click", function () {
                     createText("one");
                     canvasText = newText;
                     drawQuestion(0, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionTwo.answers);
                     questionNumber++;
+
                     break;
                 case 2:
                     console.log(currentQs)
@@ -675,7 +839,9 @@ $("#startButton").on("click", function () {
                     createText("two");
                     canvasText = newText;
                     drawQuestion(1, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionTwo.answers);
                     questionNumber++;
+
                     break;
                 case 3:
                     currentCanvasText = [];
@@ -685,7 +851,9 @@ $("#startButton").on("click", function () {
                     createText("three");
                     canvasText = newText;
                     drawQuestion(2, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionTwo.answers);
                     questionNumber++;
+
                     break;
                 case 4:
                     currentCanvasText = [];
@@ -695,10 +863,13 @@ $("#startButton").on("click", function () {
                     createText("four");
                     canvasText = newText;
                     drawQuestion(3, 5, 150, 20)
-                    questionNumber = 1;
+
                     $("#startButton").text("Next Round")
                     roundInProgress = false;
+
+                    answerChecker(triviaAnswers.sectionTwo.answers);
                     roundNumber++;
+                    questionNumber = 1;
                     break;
             }
         } else if (roundNumber === 3) {
@@ -711,6 +882,7 @@ $("#startButton").on("click", function () {
                     createText("one");
                     canvasText = newText;
                     drawQuestion(0, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionThree.answers);
                     questionNumber++;
                     break;
                 case 2:
@@ -722,6 +894,7 @@ $("#startButton").on("click", function () {
                     createText("two");
                     canvasText = newText;
                     drawQuestion(1, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionThree.answers);
                     questionNumber++;
                     break;
                 case 3:
@@ -732,6 +905,7 @@ $("#startButton").on("click", function () {
                     createText("three");
                     canvasText = newText;
                     drawQuestion(2, 5, 150, 20)
+                    answerChecker(triviaAnswers.sectionThree.answers);
                     questionNumber++;
                     break;
                 case 4:
@@ -742,10 +916,11 @@ $("#startButton").on("click", function () {
                     createText("four");
                     canvasText = newText;
                     drawQuestion(3, 5, 150, 20)
-                    questionNumber++;
+
+                    answerChecker(triviaAnswers.sectionThree.answers);
                     $("#startButton").text("Result")
 
-
+                    questionNumber++;
                     break;
                 case 5:
                     currentCanvasText = [];
@@ -753,6 +928,7 @@ $("#startButton").on("click", function () {
                     // Draw Result Board //
                     $("#startButton").text("Retry!")
                     questionNumber++;
+                    answerChecker(triviaAnswers.sectionThree.answers);
                     break;
                 case 6:
                     $("#startButton").text("Start")
@@ -766,6 +942,8 @@ $("#startButton").on("click", function () {
     }
 
     createText();
+
+
 })
 
 // While Round is going: //
@@ -773,6 +951,14 @@ $("#startButton").on("click", function () {
 // game function work end //
 // building canvas text below //
 
+// 3:48 Saturday, April 27th Notes
+// We need to check what question is displayed, 
+
+
+// access that question's section, 
+// access that section's answers, 
+// connect the buttons to the answers by index,
+// check to see if the index is correct for each individual question
 
 
 
