@@ -89,6 +89,13 @@ var objectstoadd = {
             },
         },
 
+        rowFour: {
+            row: $("<div>", { id: "sideRowFourth", class: "row sideRow" }),
+            col: {
+                self: $("div", { id: "scoreKeeper", class: "col m12 white z-depth-3" })
+            }
+        },
+
         htmlBody: {
             self: [$("html"), $("body")],
             styling: {
@@ -125,9 +132,9 @@ var rowOne = side.rowOne;
 var rowTwo = side.rowTwo;
 var rowThree = side.rowThree;
 var htmlBody = side.htmlBody;
+var score = 0;
 
-
-for (section = 0; section < 6; section++) {
+for (section = 0; section < 7; section++) {
     switch (section) {
         case 0:
             console.log(side.self)
@@ -229,6 +236,21 @@ for (section = 0; section < 6; section++) {
             }
             break;
         case 5:
+            var container = $(".container")
+            var row = side.rowFour.row
+            var rowID = $("#sideRowFourth")
+            var col = side.rowFour.col.self
+            console.log(row, col)
+            row.append(col)
+            container.append(row)
+            $("#sideRowFourth").css({
+                textAlign: "center",
+                fontSize: "2em",
+                color: "white"
+            })
+            $("#sideRowFourth").text("Score = " + String(score))
+            break;
+        case 6:
             var sections = objectstoadd.sections;
             var main = sections.main.self;
             var mainContent = sections.mainContent;
@@ -505,6 +527,7 @@ var questionNumber = 1;
 var triviaQuestions = [(triviaQs.sections.thirtiesToFifties.questions), (triviaQs.sections.sixtiesToEighties.questions), (triviaQs.sections.nineties.questions)]
 var roundInProgress = false;
 var currentCanvasText = [];
+
 function drawQuestion(qnumber, fs, fx, fy) {
     fixCanvas();
 
@@ -549,7 +572,9 @@ function canvasView(one, two, three, four) {
 function answerHelper(a, b, c, d, e, f) {
     console.log(e, f)
     if (e === f) {
-        return console.log("correct")
+        console.log("correct");
+        score++;
+        return $("#sideRowFourth").text("Score: " + String(score))
     } else {
         return console.log("incorrect")
     }
