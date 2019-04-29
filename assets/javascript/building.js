@@ -112,7 +112,6 @@ var objectstoadd = {
 
 
 var functionalVariables = [objectstoadd.side, objectstoadd.container, objectstoadd.rowOne, objectstoadd.rowTwo, objectstoadd.htmlBody]
-console.log(functionalVariables)
 // Load HTML styling //
 
 $("html").css({
@@ -125,9 +124,7 @@ $("html").css({
 })
 // Load Side // 
 var side = objectstoadd.side;
-console.log(objectstoadd.side)
 var container = side.container;
-console.log(container)
 var rowOne = side.rowOne;
 var rowTwo = side.rowTwo;
 var rowThree = side.rowThree;
@@ -137,7 +134,6 @@ var htmlBody = side.htmlBody;
 for (section = 0; section < 7; section++) {
     switch (section) {
         case 0:
-            console.log(side.self)
             side.id.css({
                 width: "25vw",
                 borderRight: "1vw",
@@ -152,7 +148,6 @@ for (section = 0; section < 7; section++) {
             break;
         case 1:
             side.id.append(container)
-            console.log("container");
             break;
         case 2:
             var container = $(".container")
@@ -211,7 +206,6 @@ for (section = 0; section < 7; section++) {
             var colTwo = side.rowThree.colTwo.self
             var colThree = side.rowThree.colThree.self
             var button = side.rowThree.col.button
-            console.log(colOne, colTwo, colThree)
             container.append(row)
             $("#sideRowThird").css({
                 marginTop: "0vh !important",
@@ -241,7 +235,6 @@ for (section = 0; section < 7; section++) {
             var rowID = $("#sideRowFourth")
             var col = side.rowFour.col.self
 
-            console.log(row, col)
             row.append(col)
             container.append(row)
             $("#sideRowFourth").css({
@@ -470,7 +463,6 @@ var triviaAnswers = {
 $("#showSideButton").on("click", function () {
     if (sideSlide === true) {
         $('canvas').detectPixelRatio(function (ratio) {
-            console.log(ratio)
             $('canvas').css({
                 height: "80vh",
                 width: "60vw"
@@ -488,7 +480,6 @@ $("#showSideButton").on("click", function () {
 
     } else {
         $('canvas').detectPixelRatio(function (ratio) {
-            console.log(ratio)
             $('canvas').css({
                 height: "80vh",
                 width: "75vw"
@@ -532,6 +523,7 @@ var triviaQuestions = [(triviaQs.sections.thirtiesToFifties.questions), (triviaQ
 var roundInProgress = false;
 var currentCanvasText = [];
 var score = 0;
+var roundScores = [];
 function drawQuestion(qnumber, fs, fx, fy) {
     fixCanvas();
 
@@ -575,9 +567,7 @@ function canvasView(one, two, three, four) {
 // Answer Checker function //
 function answerHelper(a, b) {
     var startText = $("#startButton").text()
-    console.log(a, b, startText)
     if (a === b) {
-        console.log("correct");
         score++;
         questionNumber++;
         $("#sideRowFourth").text("Score: " + String(score));
@@ -593,10 +583,68 @@ function answerHelper(a, b) {
 }
 
 
+// --___--____----____------_____-------______---------__________-----------______________---------------__________________-----------------------
+
+
+
+
+
+
+
+
+
+
+
+
+// FINAL SCREEN FUNCTION //
+function endGame(a) {
+    console.log(a)
+    var scoreDisplay = {
+        roundOneScore: roundScores[0],
+        roundTwoScore: roundScores[1],
+        roundThreeScore: (a - (roundOneScore + roundTwoScore)),
+        finScreenText: ["You made it through a tough challenge there",
+            "pudding pop", "Round One - ", "Round Two - ", "Round Three - ", "Total Score = "],
+        backgroundImage: "url(assets/images/Allen.jpg)",
+    }
+    var lines = {
+        first: "",
+        second: "",
+        third: "",
+        fourth: "",
+        fifth: "",
+        sixth: "",
+    }
+    lines.first = (scoreDisplay.finScreenText[0]);
+    lines.second = (scoreDisplay.finScreenText[2] + String(roundOneScore));
+    lines.third = (scoreDisplay.finScreenText[3] + String(roundTwoScore));
+    lines.fourth = (scoreDisplay.finScreenText[4] + String(roundThreeScore));
+    lines.fifth = (scoreDisplay.finScreenText[5] + String(a))
+    var linesArr = [lines.first, lines.second, lines.third, lines.fourth, lines.fifth, lines.sixth]
+    console.log(linesArr)
+    $('canvas').clearCanvas();
+    fixCanvas();
+    for (x = 0; x < linesArr.length; x++) {
+        $('canvas').drawText({
+            fillStyle: 'black',
+            strokeStyle: 'black',
+            strokeWidth: 0.5,
+            x: 100, y: (20 + (20 * x)),
+            fontSize: fs,
+            fontFamily: 'Verdana, sans-serif',
+            text: lines[x],
+            scaleX: 1,
+            scaleY: 1,
+        })
+    }
+}
+
+
+// END //
+
 function answerChecker(guess) {
     console.log($("#startButton").text())
     var thisAnswer;
-    console.log(guess)
     switch (roundNumber) {
         case 1:
             switch (questionNumber) {
@@ -722,22 +770,25 @@ function submitGuess(a) {
 
 }
 var currentQs = [];
+
 function roundNotInProgress(roundNumber) {
     if (roundNumber === 1) {
+
         questionNumber = 1;
         currentQs = triviaQuestions[0];
-        console.log("here")
         $("#headerOne").text(triviaQs.sections.thirtiesToFifties.header)
     }
 
     // saved older one in function below //
     if (roundNumber === 2) {
+        roundScores.push(score);
         questionNumber = 1;
         $("#headerOne").text(triviaQs.sections.sixtiesToEighties.header);
         currentQs = triviaQuestions[1];
         fixCanvas();
     }
     if (roundNumber === 3) {
+        roundScores.push(score);
         questionNumber = 1;
         $("#headerOne").text(triviaQs.sections.nineties.header);
         currentQs = triviaQuestions[2];
@@ -746,23 +797,28 @@ function roundNotInProgress(roundNumber) {
 }
 var userClick = [];
 $("#startButton").on("click", function () {
+    console.log(roundNumber, roundInProgress)
+    if (roundNumber === 4) {
+        var totalScore = score;
+        console.log(endGame(), totalScore)
+        endGame(totalScore);
 
+    }
     if (!roundInProgress) {
         roundNotInProgress(roundNumber);
         roundInProgress = true;
-        console.log("well this works", roundNumber, roundInProgress)
         $("#startButton").text("Next Question")
     }
 
 
     if (roundInProgress) {
+
         var controllerText = $("#startButton").text();
         // IF "NEXT QUESTION" //
-        if (controllerText !== "Submit Answer" && controllerText === "Next Question") {
+        if (controllerText !== "Submit Answer" && controllerText !== "End Game" && controllerText === "Next Question") {
             if (roundNumber === 1) {
                 switch (questionNumber) {
                     case 1:
-                        console.log(questionNumber)
                         currentCanvasText = [];
                         currentCanvasText.push(triviaQuestions[0][0])
                         $('canvas').clearCanvas();
@@ -773,7 +829,6 @@ $("#startButton").on("click", function () {
 
                         break;
                     case 2:
-                        console.log(questionNumber)
                         currentCanvasText = [];
                         currentCanvasText.push(triviaQuestions[0][1])
                         $('canvas').clearCanvas();
@@ -820,7 +875,6 @@ $("#startButton").on("click", function () {
 
                         break;
                     case 2:
-                        console.log(currentQs)
                         currentCanvasText = [];
                         currentCanvasText.push(triviaQuestions[1][1])
                         $('canvas').clearCanvas();
@@ -855,10 +909,10 @@ $("#startButton").on("click", function () {
 
             } else if (roundNumber === 3) {
                 console.log(questionNumber)
-                debugger;
+
                 switch (questionNumber) {
                     case 1:
-                        console.log("case 1 executed")
+
                         currentCanvasText = [];
                         currentCanvasText.push(triviaQuestions[2][0])
                         $('canvas').clearCanvas();
@@ -869,7 +923,6 @@ $("#startButton").on("click", function () {
 
                         break;
                     case 2:
-                        console.log(currentQs)
                         currentCanvasText = [];
                         currentCanvasText.push(triviaQuestions[2][1])
                         $('canvas').clearCanvas();
@@ -924,7 +977,7 @@ $("#startButton").on("click", function () {
         // END //
         // IF "SELECT ANSWER" //
 
-        if (controllerText !== "Submit Answer" || controllerText === "Select Answer...") {
+        if (controllerText !== "Submit Answer" && controllerText !== "End Game" || controllerText === "Select Answer...") {
             switch (roundNumber) {
                 case 1:
                     if (questionNumber === 5) {
@@ -934,7 +987,7 @@ $("#startButton").on("click", function () {
                         $("#sideRowFour").text("Round One Complete")
                     } else {
                         $(".sidebarColors").on("click", function () {
-                            console.log(userClick)
+
                             $("#startButton").text("Submit Answer")
                             return userClick[0] = ($(this).text());
                         })
@@ -949,7 +1002,7 @@ $("#startButton").on("click", function () {
                         $("#sideRowFour").text("Round One Complete")
                     } else {
                         $(".sidebarColors").on("click", function () {
-                            console.log(userClick)
+
                             $("#startButton").text("Submit Answer")
                             return userClick[0] = ($(this).text());
                         })
@@ -974,7 +1027,6 @@ $("#startButton").on("click", function () {
                     }
                     else {
                         $(".sidebarColors").on("click", function () {
-
                             console.log(userClick)
                             $("#startButton").text("Submit Answer")
                             return userClick[0] = ($(this).text())
@@ -993,6 +1045,10 @@ $("#startButton").on("click", function () {
             submitGuess(Number(userClick))
             userClick = [""];
         }
+        // END //
+
+
+
 
     }
 
