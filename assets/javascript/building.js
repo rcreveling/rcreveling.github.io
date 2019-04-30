@@ -90,9 +90,15 @@ var objectstoadd = {
         },
 
         rowFour: {
-            row: $("<div>", { id: "sideRowFourth", class: "row sideRow" }),
+            row: $("<div>", { id: "sideRowFourth", class: "row sideRow  z-depth-3" }),
             col: {
-                self: $("div", { id: "scoreKeeper", class: "col m12 white z-depth-3" })
+                self: $("<div>", { id: "scoreKeeper", class: "col m12 white" })
+            }
+        },
+        rowFive: {
+            row: $("<div>", { id: "sideRowFifth", class: "row sideRow  z-depth-5" }),
+            col: {
+                self: $("<div>", { id: "informationText", class: "card m12 white" })
             }
         },
 
@@ -131,7 +137,7 @@ var rowThree = side.rowThree;
 var htmlBody = side.htmlBody;
 
 
-for (section = 0; section < 7; section++) {
+for (section = 0; section < 8; section++) {
     switch (section) {
         case 0:
             side.id.css({
@@ -232,19 +238,43 @@ for (section = 0; section < 7; section++) {
         case 5:
             var container = $(".container")
             var row = side.rowFour.row
-            var rowID = $("#sideRowFourth")
             var col = side.rowFour.col.self
 
-            row.append(col)
-            container.append(row)
+            $(".container").append(row)
+            $("#scoreKeeper").css({
+
+                fontSize: "2em",
+                color: "white",
+                border: "1px solid black",
+                borderRadius: "5px",
+            })
             $("#sideRowFourth").css({
                 textAlign: "center",
-                fontSize: "2em",
-                color: "white"
+                backgroundColor: "white",
+                border: "1px solid black",
+                borderRadius: "5px",
             })
-            $("#sideRowFourth").text("Score: " + String(0))
+            $("#sideRowFourth").append(col)
+            $("#scoreKeeper").text("Score: " + String(0))
             break;
         case 6:
+            var row = side.rowFive.row
+            var col = side.rowFive.col.self
+            var container = $(".container")
+            row.append(col)
+            container.append(row)
+
+            $("#informationText").css({
+                backgroundColor: "rgba(250, 250, 250, 0.5)",
+                height: "15vh",
+                textAlign: "center",
+                fontSize: "2em",
+                fontFamily: "Georgia, sans-serif",
+                color: "black",
+            })
+            $("#informationText").text("Press Start to Begin!")
+            break;
+        case 7:
             var sections = objectstoadd.sections;
             var main = sections.main.self;
             var mainContent = sections.mainContent;
@@ -301,6 +331,11 @@ for (section = 0; section < 7; section++) {
                 width: "10vw"
             }, 500, "linear")
             $("#showSideButton").animate({ left: "10vw" }, 500, "linear")
+            $("#informationText").animate({
+                height: "20vh",
+                fontSize: "1em",
+                minWidth: "10vw",
+            })
             $("#myCanvas").animate({
                 marginLeft: "15vw",
                 marginRight: "10vw",
@@ -352,8 +387,8 @@ var triviaQs = {
             header: "...1990's Trivia",
             questions: ["Was Limp Bizkit at the Forefront of style and culture?",
                 "_____ Little Pill was Alanis Morissette's only achievement",
-                "Y2k",
-                "Sublime"],
+                "Bradley Nowell sang for which band until what year?",
+                "2 minutes after midnight on Y2K, this country had a Nuclear Power Plant scare"],
         }
 
     }
@@ -442,17 +477,17 @@ var triviaAnswers = {
                 ]
             },
             {
-                three: ["Section Three: 3 Answer 1",
-                    "Section Three: 3 Answer 2",
-                    "Section Three: 3 Answer 3",
-                    "Section Three: 3 Answer 4"
+                three: ["Sublime, 1996",
+                    "Reel Big Fish, 1999",
+                    "Smash Mouth, 1997",
+                    "No Doubt, 1992"
                 ]
             },
             {
-                four: ["Section Three: 4 Answer 1",
-                    "Section Three: 4 Answer 2",
-                    "Section Three: 4 Answer 3",
-                    "Section Three: 4 Answer 4"
+                four: ["South Korea",
+                    "Czechoslovakia",
+                    "Japan",
+                    "Chechnya"
                 ]
             }]
     }
@@ -638,7 +673,7 @@ function endGame(a) {
                 strokeStyle: 'black',
                 strokeWidth: 0.5,
                 x: 150, y: (20 + (20 * x)),
-                fontSize: 14,
+                fontSize: 15,
                 fontFamily: 'Georgia, serif',
                 text: linesArr[x],
                 scaleX: 1,
@@ -671,7 +706,7 @@ function endGame(a) {
                 strokeStyle: 'black',
                 strokeWidth: 0.5,
                 x: 150, y: (20 + (20 * x)),
-                fontSize: 12,
+                fontSize: 14,
                 fontFamily: 'Georgia, serif',
                 text: linesArr[x],
                 scaleX: 1,
@@ -679,72 +714,8 @@ function endGame(a) {
             })
         }
     }
-    // for (i = 0; i < 7; i++) {
-    //     fx = 125;
-    //     fs = 14;
-    //     console.log(layerseh)
-    //     if (1 > i > 6) {
-    //         console.log(linesArr[i], fx)
 
-    //         $('#myCanvas').drawText({
-    //             fillStyle: 'black',
-    //             strokeStyle: 'black',
-    //             strokeWidth: 0.5,
-    //             fontSize: 16,
-    //             x: 150, y: (20 + (18 * fx)),
-    //             fontFamily: 'Verdana, sans-serif',
-    //             text: linesArr[i],
-    //             scaleX: 1,
-    //             scaleY: 1,
-    //         })
-    //     } else {
-    //         console.log(linesArr[i], fx)
-    //         $('#myCanvas').drawText({
-    //             fillStyle: 'black',
-    //             strokeStyle: 'black',
-    //             strokeWidth: 0.5,
-    //             fontSize: 12,
-    //             x: 125, y: (20 + (18 * fx)),
-    //             fontFamily: 'Verdana, sans-serif',
-    //             text: linesArr[i],
-    //             scaleX: 1,
-    //             scaleY: 1,
-    //         })
-    //     }
-
-    // }
     // CURRENT ATEMPT END //
-
-    /// WORKING IN drawQuestion ///
-    function reference() {
-        for (x = 0; x < canvasText.length; x++) {
-            if (x != 0) {
-                $('canvas').drawText({
-                    fillStyle: 'black',
-                    strokeStyle: 'black',
-                    strokeWidth: 0.5,
-                    x: fx, y: (fy + (20 * x)),
-                    fontSize: fs,
-                    fontFamily: 'Verdana, sans-serif',
-                    text: canvasText[x],
-                    scaleX: 1,
-                    scaleY: 1,
-                })
-            } else {
-                $('canvas').drawText({
-                    fillStyle: 'black',
-                    strokeStyle: 'black',
-                    strokeWidth: 0.5,
-                    x: fx, y: (fy + (20 * x)),
-                    fontSize: (fs + 3),
-                    fontFamily: 'Verdana, sans-serif',
-                    text: canvasText[x],
-                    scaleX: 1,
-                    scaleY: 1,
-                })
-            }
-        }
-    }
 
 
 }
@@ -909,6 +880,7 @@ function roundNotInProgress(roundNumber) {
 var userClick = [];
 $("#startButton").on("click", function () {
     console.log(roundNumber, roundInProgress)
+    $("#informationText").text(" ")
     if (roundNumber === 4) {
 
         endGame(score);
