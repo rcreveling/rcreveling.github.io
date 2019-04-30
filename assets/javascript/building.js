@@ -473,7 +473,7 @@ $("#showSideButton").on("click", function () {
             y: "80vh",
             scaleX: 1, scaleY: 1
         })
-        $("#headerOne").css({ fontSize: "2em", height: "17vh" })
+        $("#headerOne").css({ fontSize: "2em", height: "17vh", paddingLeft: "none", width: "8vw" })
         if (roundInProgress) {
             $("#startButton").text("Next")
         }
@@ -490,7 +490,7 @@ $("#showSideButton").on("click", function () {
             y: "80vh",
             scaleX: 1, scaleY: 1
         })
-        $("#headerOne").css({ fontSize: "4em", height: "17vh" })
+        $("#headerOne").css({ fontSize: "4em", height: "17vh", paddingLeft: "none", width: "15vw" })
         if (roundInProgress) {
             $("#startButton").text("Next Question")
         }
@@ -600,11 +600,9 @@ function answerHelper(a, b) {
 function endGame(a) {
     console.log(a)
     var scoreDisplay = {
-        roundOneScore: roundScores[0],
-        roundTwoScore: roundScores[1],
-        roundThreeScore: (a - (roundOneScore + roundTwoScore)),
+
         finScreenText: ["You made it through a tough challenge there",
-            "pudding pop", "Round One - ", "Round Two - ", "Round Three - ", "Total Score = "],
+            "pudding pop", "- 30's-50's:  ", "- 60's-80's Quiz:  ", "- 90's:  ...do the math", "Total Score = "],
         backgroundImage: "url(assets/images/Allen.jpg)",
     }
     var lines = {
@@ -614,29 +612,141 @@ function endGame(a) {
         fourth: "",
         fifth: "",
         sixth: "",
+        extra: "",
     }
+
     lines.first = (scoreDisplay.finScreenText[0]);
-    lines.second = (scoreDisplay.finScreenText[2] + String(roundOneScore));
-    lines.third = (scoreDisplay.finScreenText[3] + String(roundTwoScore));
-    lines.fourth = (scoreDisplay.finScreenText[4] + String(roundThreeScore));
-    lines.fifth = (scoreDisplay.finScreenText[5] + String(a))
-    var linesArr = [lines.first, lines.second, lines.third, lines.fourth, lines.fifth, lines.sixth]
+    lines.second = (scoreDisplay.finScreenText[2] + roundScores[0]);
+    lines.third = (scoreDisplay.finScreenText[3] + (roundScores[1] - roundScores[0]));
+    lines.fourth = (scoreDisplay.finScreenText[4]);
+    lines.fifth = (scoreDisplay.finScreenText[5] + a)
+    lines.extra = (scoreDisplay.finScreenText[1])
+    var linesArr = [lines.first, lines.extra, lines.second, lines.third, lines.fourth, lines.fifth]
+    var fx;
+    var fs;
+    var layerseh = $('canvas').getLayers('endScreenText');
     console.log(linesArr)
-    $('canvas').clearCanvas();
+    debugger;
+
+    // CURRENT ATTEMPT //    
+
     fixCanvas();
     for (x = 0; x < linesArr.length; x++) {
-        $('canvas').drawText({
-            fillStyle: 'black',
-            strokeStyle: 'black',
-            strokeWidth: 0.5,
-            x: 100, y: (20 + (20 * x)),
-            fontSize: fs,
-            fontFamily: 'Verdana, sans-serif',
-            text: lines[x],
-            scaleX: 1,
-            scaleY: 1,
-        })
+        if (x === 5) {
+            $('canvas').drawText({
+                fillStyle: 'black',
+                strokeStyle: 'black',
+                strokeWidth: 0.5,
+                x: 150, y: (20 + (20 * x)),
+                fontSize: 14,
+                fontFamily: 'Georgia, serif',
+                text: linesArr[x],
+                scaleX: 1,
+                scaleY: 1,
+            })
+        }
+        if (x >= 2 && x !== 5) {
+            if (x === 2) {
+                fx = 100
+            } else if (x === 3) {
+                fx = 110
+            } else {
+                fx = 115
+            }
+            $('canvas').drawText({
+                fillStyle: 'black',
+                strokeStyle: 'black',
+                strokeWidth: 0.5,
+                x: fx, y: (20 + (20 * x)),
+                fontSize: 10,
+                fontFamily: 'Georgia, serif',
+                text: linesArr[x],
+                scaleX: 1,
+                scaleY: 1,
+            })
+        }
+        if (x === 0 || x === 1) {
+            $('canvas').drawText({
+                fillStyle: 'black',
+                strokeStyle: 'black',
+                strokeWidth: 0.5,
+                x: 150, y: (20 + (20 * x)),
+                fontSize: 12,
+                fontFamily: 'Georgia, serif',
+                text: linesArr[x],
+                scaleX: 1,
+                scaleY: 1,
+            })
+        }
     }
+    // for (i = 0; i < 7; i++) {
+    //     fx = 125;
+    //     fs = 14;
+    //     console.log(layerseh)
+    //     if (1 > i > 6) {
+    //         console.log(linesArr[i], fx)
+
+    //         $('#myCanvas').drawText({
+    //             fillStyle: 'black',
+    //             strokeStyle: 'black',
+    //             strokeWidth: 0.5,
+    //             fontSize: 16,
+    //             x: 150, y: (20 + (18 * fx)),
+    //             fontFamily: 'Verdana, sans-serif',
+    //             text: linesArr[i],
+    //             scaleX: 1,
+    //             scaleY: 1,
+    //         })
+    //     } else {
+    //         console.log(linesArr[i], fx)
+    //         $('#myCanvas').drawText({
+    //             fillStyle: 'black',
+    //             strokeStyle: 'black',
+    //             strokeWidth: 0.5,
+    //             fontSize: 12,
+    //             x: 125, y: (20 + (18 * fx)),
+    //             fontFamily: 'Verdana, sans-serif',
+    //             text: linesArr[i],
+    //             scaleX: 1,
+    //             scaleY: 1,
+    //         })
+    //     }
+
+    // }
+    // CURRENT ATEMPT END //
+
+    /// WORKING IN drawQuestion ///
+    function reference() {
+        for (x = 0; x < canvasText.length; x++) {
+            if (x != 0) {
+                $('canvas').drawText({
+                    fillStyle: 'black',
+                    strokeStyle: 'black',
+                    strokeWidth: 0.5,
+                    x: fx, y: (fy + (20 * x)),
+                    fontSize: fs,
+                    fontFamily: 'Verdana, sans-serif',
+                    text: canvasText[x],
+                    scaleX: 1,
+                    scaleY: 1,
+                })
+            } else {
+                $('canvas').drawText({
+                    fillStyle: 'black',
+                    strokeStyle: 'black',
+                    strokeWidth: 0.5,
+                    x: fx, y: (fy + (20 * x)),
+                    fontSize: (fs + 3),
+                    fontFamily: 'Verdana, sans-serif',
+                    text: canvasText[x],
+                    scaleX: 1,
+                    scaleY: 1,
+                })
+            }
+        }
+    }
+
+
 }
 
 
@@ -781,27 +891,27 @@ function roundNotInProgress(roundNumber) {
 
     // saved older one in function below //
     if (roundNumber === 2) {
-        roundScores.push(score);
         questionNumber = 1;
         $("#headerOne").text(triviaQs.sections.sixtiesToEighties.header);
         currentQs = triviaQuestions[1];
         fixCanvas();
+        return roundScores.push(score);
     }
     if (roundNumber === 3) {
-        roundScores.push(score);
+
         questionNumber = 1;
         $("#headerOne").text(triviaQs.sections.nineties.header);
         currentQs = triviaQuestions[2];
         fixCanvas();
+        return roundScores.push(score);
     }
 }
 var userClick = [];
 $("#startButton").on("click", function () {
     console.log(roundNumber, roundInProgress)
     if (roundNumber === 4) {
-        var totalScore = score;
-        console.log(endGame(), totalScore)
-        endGame(totalScore);
+
+        endGame(score);
 
     }
     if (!roundInProgress) {
