@@ -222,17 +222,16 @@ for (section = 0; section < 8; section++) {
 
             $(".container").append(row)
             $("#scoreKeeper").css({
-
                 fontSize: "2em",
                 color: "white",
                 border: "1px solid black",
-                borderRadius: "5px",
+                borderRadius: "10px",
             })
             $("#sideRowFourth").css({
                 textAlign: "center",
                 backgroundColor: "white",
                 border: "1px solid black",
-                borderRadius: "5px",
+                borderRadius: "10px !important",
             })
             $("#sideRowFourth").append(col)
             $("#scoreKeeper").text("Score: " + String(0))
@@ -250,6 +249,7 @@ for (section = 0; section < 8; section++) {
                 fontSize: "2em",
                 fontFamily: "Georgia, sans-serif",
                 color: "black",
+                borderRadius: "10px"
             })
             $("#informationText").text("Press Start to Begin!")
             break;
@@ -310,16 +310,22 @@ for (section = 0; section < 8; section++) {
             }, 500, "linear")
             $("#showSideButton").animate({ left: "18vw" }, 500, "linear")
             $("#informationText").animate({
-                height: "20vh",
+                height: "25vh",
                 fontSize: "1.5em",
-                minWidth: "14vw",
-                height: "30vh"
+                minWidth: "12vw",
+                height: "30vh",
+                borderRadius: "10px"
             }, 500, "linear")
             $("#myCanvas").animate({
                 marginLeft: "20vw",
                 width: "75vw",
             }, 500, "linear")
-            $("#headerOne").animate({ fontSize: "3em", height: "15vh", width: "13vw", paddingRight: "0vw" }, 320, "linear")
+            $("#headerOne").animate({
+                fontSize: "3em",
+                height: "20vh",
+                width: "13vw",
+                paddingRight: "0vw"
+            }, 320, "linear")
             sideSlide = true;
         }
         else if (sideSlide) {
@@ -331,13 +337,19 @@ for (section = 0; section < 8; section++) {
                 fontSize: "2em",
                 minWidth: "16vw",
                 height: "20vh",
+                borderRadius: "10px",
             }, 500, "linear")
             $("#myCanvas").animate({
                 marginLeft: "30vw",
                 width: "65vw",
             }, 500, "linear")
             $("#showSideButton").animate({ left: "25vw" }, 500, "linear")
-            $("#headerOne").animate({ fontSize: "4em", height: "20vh", width: "20vw", paddingRight: "2vw" }, 320, "linear")
+            $("#headerOne").animate({
+                fontSize: "4em",
+                height: "25vh",
+                width: "18vw",
+                paddingRight: "1vw"
+            }, 320, "linear")
 
             sideSlide = false;
         }
@@ -569,18 +581,35 @@ function answerHelper(a, b) {
         score++;
         questionNumber++;
         $("#sideRowFourth").text("Score: " + String(score));
-        $("#informationText").text("Correct!")
-        $("#sideRowFifth").animate({ backgroundColor: "lawngreen" }, 200, "swing")
-        $("#sideRowFifth").animate({ backgroundColor: "white" }, 2300, "swing")
-        return $("#startButton").text("Next Question");
+        $("#informationText").html("Correct!" + "<br>" + "+1")
+        $("#sideRowFifth").animate({
+            backgroundColor: "lawngreen",
+            borderRadius: "10px"
+        }, 200, "swing", function () {
+            $("#startButton").text("Next Question");
+        })
+        $("#sideRowFifth").animate({
+            backgroundColor: "rgba(180, 180, 180, 0.3)",
+            borderRadius: "10px"
+        }, 1500, "swing")
+        return
     }
     else {
 
         questionNumber++;
-        $("#startButton").text("Next Question")
-        $("#informationText").text("Wrong...")
-        $("#sideRowFifth").animate({ backgroundColor: "red" }, 200, "swing")
-        $("#sideRowFifth").animate({ backgroundColor: "white" }, 2300, "swing")
+        $("#informationText").html("Wrong..." + "<br>" + "Correct Answer: " + String(a))
+        $("#sideRowFifth").animate({
+            backgroundColor: "red",
+            borderRadius: "10px"
+        }, 200, "swing", function () {
+            $("#startButton").text("Next Question")
+
+        })
+        $("#sideRowFifth").animate({
+            backgroundColor: "rgba(180, 180, 180, 0.3)",
+            borderRadius: "10px"
+        }, 1500, "swing")
+
     }
 }
 
@@ -610,13 +639,13 @@ function endGame(a) {
     lines.extra = (scoreDisplay.finScreenText[1])
     var linesArr = [lines.first, lines.extra, lines.second, lines.third, lines.fourth, lines.fifth]
     var fx;
-    var fs;
-    var layerseh = $('canvas').getLayers('endScreenText');
+
     console.log(linesArr)
     debugger;
     // CURRENT ATTEMPT //    
     fixCanvas();
     for (x = 0; x < linesArr.length; x++) {
+
         if (x === 5) {
             $('canvas').drawText({
                 fillStyle: 'black',
@@ -632,11 +661,14 @@ function endGame(a) {
         }
         if (x >= 2 && x !== 5) {
             if (x === 2) {
-                fx = 100
+                fx = 100;
+                var fff = "'Montserrat, sans-serif'";
             } else if (x === 3) {
-                fx = 110
+                fx = 110;
+                var fff = "'Wendy one, sans-serif'";
             } else {
-                fx = 115
+                fx = 115;
+                var fff = "'Gugi, cursive'";
             }
             $('canvas').drawText({
                 fillStyle: 'black',
@@ -644,7 +676,7 @@ function endGame(a) {
                 strokeWidth: 0.5,
                 x: fx, y: (20 + (20 * x)),
                 fontSize: 10,
-                fontFamily: 'Georgia, serif',
+                fontFamily: fff,
                 text: linesArr[x],
                 scaleX: 1,
                 scaleY: 1,
@@ -785,7 +817,6 @@ function createText(question) {
     return canvasView(one, two, three, four)
 }
 function submitGuess(a) {
-
     answerChecker(a)
     console.log(a)
 }
@@ -795,11 +826,66 @@ function roundNotInProgress(roundNumber) {
         questionNumber = 1;
         currentQs = triviaQuestions[0];
         $("#headerOne").text(triviaQs.sections.thirtiesToFifties.header)
+        $("#headerOne").css({
+            fontFamily: "'Montserrat', 'sans-serif'",
+            backgroundColor: "rgba(0, 30, 255, 0.6)",
+            color: "rgb(210, 190, 205)",
+            textShadow: "2px 2px 2px orange",
+            borderRadius: "15px",
+            border: "1px solid orange",
+            boxShadow: "inset 0px 2px 3px 1px rgb(20, 20, 50)",
+            transition: ".5s ease",
+        })
+        $("#mainWrap").css({
+            backgroundImage: "url(assets/images/background-blur-blurred-949587.jpg)",
+            backgroundSize: "cover",
+            boxShadow: "inset 0px 0px 4px black",
+            transition: ".5s ease",
+        })
+        $("#sidebar").css({
+            backgroundColor: "rgba(100, 100, 70, 0.7)",
+            boxShadow: "inset 0px 0px 4px black",
+            transition: ".5s ease",
+        })
+        $('canvas').css({
+            backgroundColor: "rgba(250, 250, 250, 0.8)",
+            border: "1px solid black",
+            boxShadow: "inset 0px 0px 10px black",
+            transition: ".5s ease",
+        })
     }
     // saved older one in function below //
     if (roundNumber === 2) {
         questionNumber = 1;
         $("#headerOne").text(triviaQs.sections.sixtiesToEighties.header);
+        $("#headerOne").css({
+            fontFamily: "'Wendy One', 'sans-serif'",
+            fontSize: "4.2em",
+            backgroundColor: "rgb(204, 204, 0)",
+            color: "rgba(220, 100, 220, 0.8)",
+            textShadow: "2px 2px black",
+            borderRadius: "15px",
+            border: "1px solid orange",
+            boxShadow: "inset 0px 2px 3px 1px rgb(20, 20, 50)",
+            transition: ".5s ease",
+        })
+        $("#mainWrap").css({
+            backgroundImage: "url(assets/images/art-artistic-attractive-990824.jpg)",
+            backgroundSize: "cover",
+            boxShadow: "inset 0px 0px 4px black",
+            transition: ".5s ease",
+        })
+        $("#sidebar").css({
+            backgroundColor: "rgba(175, 50, 175, 0.7)",
+            boxShadow: "inset 0px 0px 4px black",
+            transition: ".5s ease",
+        })
+        $('canvas').css({
+            backgroundColor: "rgba(250, 250, 250, 0.8)",
+            border: "1px solid black",
+            boxShadow: "inset 0px 0px 10px black",
+            transition: ".5s ease",
+        })
         currentQs = triviaQuestions[1];
         fixCanvas();
         return roundScores.push(score);
@@ -807,6 +893,35 @@ function roundNotInProgress(roundNumber) {
     if (roundNumber === 3) {
         questionNumber = 1;
         $("#headerOne").text(triviaQs.sections.nineties.header);
+        $("#headerOne").css({
+            fontFamily: "'Gugi', 'cursive'",
+            fontSize: "4.5em",
+            backgroundColor: "rgb(0, 250, 200)",
+            color: "rgba(153, 51, 255, 0.8)",
+            textShadow: "2px 2px salmon",
+            borderRadius: "15px",
+            border: "1px 1px solid purple",
+            boxShadow: "inset 0px 2px 3px 1px rgb(20, 20, 50)",
+            transition: ".5s ease",
+        })
+        $("#mainWrap").css({
+            backgroundImage: "url(assets/images/90s-website-style.jpg)",
+            backgroundSize: "cover",
+            boxShadow: "inset 0px 0px 4px black",
+            transition: ".5s ease",
+        })
+        $("#sidebar").css({
+            backgroundColor: "rgba(253, 128, 140, 0.7)",
+            boxShadow: "inset 0px 0px 4px black",
+            transition: ".5s ease",
+        })
+        $('canvas').css({
+            backgroundColor: "rgba(250, 250, 250, 0.8)",
+            border: "1px solid black",
+            boxShadow: "inset 0px 0px 10px black",
+            transition: ".5s ease",
+
+        })
         currentQs = triviaQuestions[2];
         fixCanvas();
         return roundScores.push(score);
@@ -978,7 +1093,7 @@ $("#startButton").on("click", function () {
                         $(".sidebarColors").on("click", function () {
                             $("#startButton").text("Submit Answer")
                             userClick[0] = ($(this).text())
-                            $("#informationText").text("Your Choice: " + userClick[0])
+                            $("#informationText").html("Your Choice: " + userClick[0] + "<br>" + "   And...")
                             return
                         })
                     }
@@ -993,7 +1108,7 @@ $("#startButton").on("click", function () {
                         $(".sidebarColors").on("click", function () {
                             $("#startButton").text("Submit Answer")
                             userClick[0] = ($(this).text())
-                            $("#informationText").text("Your Choice: " + userClick[0])
+                            $("#informationText").html("Your Choice: " + userClick[0] + "<br>" + "   And...")
                             return
                         })
                     }
@@ -1020,7 +1135,7 @@ $("#startButton").on("click", function () {
                             console.log(userClick)
                             $("#startButton").text("Submit Answer")
                             userClick[0] = ($(this).text())
-                            $("#informationText").text("Your Choice: " + userClick[0])
+                            $("#informationText").html("Your Choice: " + userClick[0] + "<br>" + "   And...")
                             return
                         })
                     }
@@ -1031,8 +1146,21 @@ $("#startButton").on("click", function () {
         // IF "SUBMIT ANSWER" //
         if (controllerText === "Submit Answer") {
             console.log(userClick)
-            submitGuess(Number(userClick))
-            userClick = [""];
+            $("#informationText").fadeOut("slow", function () {
+                submitGuess(Number(userClick))
+                $("#informationText").fadeIn("fast", function () {
+                    $("#informationText").animate({
+                        fontSize: "2.5em"
+                    }, 200, "linear", function () {
+                        $("#informationText").animate({
+                            fontSize: "2em"
+                        }, 200, "linear")
+                    })
+                    userClick = [""];
+                })
+            })
+
+
         }
         // END //
     }
