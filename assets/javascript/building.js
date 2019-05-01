@@ -785,6 +785,7 @@ function createText(question) {
     return canvasView(one, two, three, four)
 }
 function submitGuess(a) {
+
     answerChecker(a)
     console.log(a)
 }
@@ -976,7 +977,9 @@ $("#startButton").on("click", function () {
                     } else {
                         $(".sidebarColors").on("click", function () {
                             $("#startButton").text("Submit Answer")
-                            return userClick[0] = ($(this).text());
+                            userClick[0] = ($(this).text())
+                            $("#informationText").text("Your Choice: " + userClick[0])
+                            return
                         })
                     }
                     break;
@@ -989,7 +992,9 @@ $("#startButton").on("click", function () {
                     } else {
                         $(".sidebarColors").on("click", function () {
                             $("#startButton").text("Submit Answer")
-                            return userClick[0] = ($(this).text());
+                            userClick[0] = ($(this).text())
+                            $("#informationText").text("Your Choice: " + userClick[0])
+                            return
                         })
                     }
                     break;
@@ -1014,7 +1019,9 @@ $("#startButton").on("click", function () {
                         $(".sidebarColors").on("click", function () {
                             console.log(userClick)
                             $("#startButton").text("Submit Answer")
-                            return userClick[0] = ($(this).text())
+                            userClick[0] = ($(this).text())
+                            $("#informationText").text("Your Choice: " + userClick[0])
+                            return
                         })
                     }
                     break;
