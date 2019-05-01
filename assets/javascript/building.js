@@ -32,9 +32,7 @@ var objectstoadd = {
             backgroundColor: "rgba(46, 86, 131, 0.8)",
             position: "relative",
         },
-
         container: ($("<div>", { id: "sideContainer", class: "container" })),
-
         rowOne: {
             row: $("<div>", { id: "sideRowFirst", class: "row sideRow" }),
             col: {
@@ -54,7 +52,6 @@ var objectstoadd = {
                 }
             }
         },
-
         rowTwo: {
             row: $("<div>", { id: "sideRowSecond", class: "row sideRow" }),
             col: {
@@ -62,33 +59,22 @@ var objectstoadd = {
                 button: $("<button>", { id: "startButton", class: "btn black white-text" }),
             }
         },
-
         rowThree: {
             row: $("<div>", { id: "sideRowThird", class: "row sideRow" }),
             col: {
-
                 self: $("<div>", { id: "One", class: "btn col m3 sidebarColors red" }),
-
-
                 header: $("<h3>"),
             },
             colOne: {
-
                 self: $("<div>", { id: "Two", class: "btn col m3 sidebarColors green" }),
-
             },
             colTwo: {
-
                 self: $("<div>", { id: "Three", class: "btn col m3 sidebarColors blue" }),
-
             },
             colThree: {
-
                 self: $("<div>", { id: "Four", class: "btn col m3 sidebarColors yellow" }),
-
             },
         },
-
         rowFour: {
             row: $("<div>", { id: "sideRowFourth", class: "row sideRow  z-depth-3" }),
             col: {
@@ -101,7 +87,6 @@ var objectstoadd = {
                 self: $("<div>", { id: "informationText", class: "card m12 white" })
             }
         },
-
         htmlBody: {
             self: [$("html"), $("body")],
             styling: {
@@ -115,11 +100,8 @@ var objectstoadd = {
         }
     }
 }
-
-
 var functionalVariables = [objectstoadd.side, objectstoadd.container, objectstoadd.rowOne, objectstoadd.rowTwo, objectstoadd.htmlBody]
 // Load HTML styling //
-
 $("html").css({
     maxHeight: "100vh !important",
     height: "100vh !important",
@@ -135,8 +117,6 @@ var rowOne = side.rowOne;
 var rowTwo = side.rowTwo;
 var rowThree = side.rowThree;
 var htmlBody = side.htmlBody;
-
-
 for (section = 0; section < 8; section++) {
     switch (section) {
         case 0:
@@ -263,7 +243,6 @@ for (section = 0; section < 8; section++) {
             var container = $(".container")
             row.append(col)
             container.append(row)
-
             $("#informationText").css({
                 backgroundColor: "rgba(250, 250, 250, 0.5)",
                 height: "15vh",
@@ -299,18 +278,17 @@ for (section = 0; section < 8; section++) {
                 $("#mainWrap").append(canvas);
             $("#myCanvas").css({
                 height: "80vh",
-                width: "60vw",
+                width: "65vw",
                 backgroundColor: "rgba(250, 250, 250, 0.6)",
                 border: "none !important",
                 padding: "none !important",
                 display: "flex",
                 marginLeft: "30vw",
-                marginRight: "10vw",
+                marginRight: "5vw",
                 marginTop: "10vh",
                 borderRadius: "20px",
                 zIndex: "2"
             })
-
             $("#mainWrap").append(button);
             $("#showSideButton").css({
                 position: "fixed",
@@ -326,48 +304,51 @@ for (section = 0; section < 8; section++) {
     var sideSlide = false;
     SBSfunction.on("click", function () {
         if (!sideSlide) {
-
             $("#sidebar").animate({
-                width: "10vw"
+                width: "18vw",
+                paddingLeft: "0 !important",
             }, 500, "linear")
-            $("#showSideButton").animate({ left: "10vw" }, 500, "linear")
+            $("#showSideButton").animate({ left: "18vw" }, 500, "linear")
             $("#informationText").animate({
                 height: "20vh",
-                fontSize: "1em",
-                minWidth: "10vw",
-            })
+                fontSize: "1.5em",
+                minWidth: "14vw",
+                height: "30vh"
+            }, 500, "linear")
             $("#myCanvas").animate({
-                marginLeft: "15vw",
-                marginRight: "10vw",
+                marginLeft: "20vw",
                 width: "75vw",
             }, 500, "linear")
+            $("#headerOne").animate({ fontSize: "3em", height: "15vh", width: "13vw", paddingRight: "0vw" }, 320, "linear")
             sideSlide = true;
-
         }
         else if (sideSlide) {
             $("#sidebar").animate({
                 width: "25vw"
             }, 500, "linear")
+            $("#informationText").animate({
+                height: "20vh",
+                fontSize: "2em",
+                minWidth: "16vw",
+                height: "20vh",
+            }, 500, "linear")
             $("#myCanvas").animate({
                 marginLeft: "30vw",
-                marginRight: "10vw",
-                width: "60vw",
+                width: "65vw",
             }, 500, "linear")
             $("#showSideButton").animate({ left: "25vw" }, 500, "linear")
-            sideSlide = false;
+            $("#headerOne").animate({ fontSize: "4em", height: "20vh", width: "20vw", paddingRight: "2vw" }, 320, "linear")
 
+            sideSlide = false;
         }
     })
 }
 // Page Loaded //
-
 //---------------------------------------------------------------------------------------------------------------------------------//
-
 //Start adding Function //
 var myCanvas = $("#myCanvas")
 var canvasText = ""
 var triviaQs = {
-
     sections: {
         thirtiesToFifties: {
             header: "1930's - 1950's Trivia",
@@ -390,7 +371,6 @@ var triviaQs = {
                 "Bradley Nowell sang for which band until what year?",
                 "What country had a Nuclear Power Plant scare at 12:02 01-01-2000?"],
         }
-
     }
 }
 var triviaAnswers = {
@@ -429,7 +409,6 @@ var triviaAnswers = {
             }
         ]
     },
-
     sectionTwo: {
         answers: [
             {
@@ -460,7 +439,6 @@ var triviaAnswers = {
                 ]
             }]
     },
-
     sectionThree: {
         answers: [
             {
@@ -492,9 +470,6 @@ var triviaAnswers = {
             }]
     }
 }
-
-
-
 $("#showSideButton").on("click", function () {
     if (sideSlide === true) {
         $('canvas').detectPixelRatio(function (ratio) {
@@ -512,7 +487,6 @@ $("#showSideButton").on("click", function () {
         if (roundInProgress) {
             $("#startButton").text("Next")
         }
-
     } else {
         $('canvas').detectPixelRatio(function (ratio) {
             $('canvas').css({
@@ -531,15 +505,10 @@ $("#showSideButton").on("click", function () {
         }
     }
 })
-
-
 // Game function //
-
 // fixCanvas helper function used often //
 function fixCanvas() {
-
     $('canvas').detectPixelRatio(function (ratio) {
-
         $('canvas').css({
             height: "80vh",
             width: "75vw"
@@ -588,53 +557,38 @@ function drawQuestion(qnumber, fs, fx, fy) {
             })
         }
     }
-
 }
 function canvasView(one, two, three, four) {
-
     newText = [];
     newText = [currentCanvasText.join(""), one, two, three, four]
     return (currentCanvasText.join("") + " " + one + " " + two + " " + three + " " + four)
-
-
 }
 // Answer Checker function //
 function answerHelper(a, b) {
-    var startText = $("#startButton").text()
     if (a === b) {
         score++;
         questionNumber++;
         $("#sideRowFourth").text("Score: " + String(score));
+        $("#informationText").text("Correct!")
+        $("#sideRowFifth").animate({ backgroundColor: "lawngreen" }, 200, "swing")
+        $("#sideRowFifth").animate({ backgroundColor: "white" }, 2300, "swing")
         return $("#startButton").text("Next Question");
     }
     else {
+
         questionNumber++;
         $("#startButton").text("Next Question")
-
+        $("#informationText").text("Wrong...")
+        $("#sideRowFifth").animate({ backgroundColor: "red" }, 200, "swing")
+        $("#sideRowFifth").animate({ backgroundColor: "white" }, 2300, "swing")
     }
-
-
 }
 
-
 // --___--____----____------_____-------______---------__________-----------______________---------------__________________-----------------------
-
-
-
-
-
-
-
-
-
-
-
-
 // FINAL SCREEN FUNCTION //
 function endGame(a) {
     console.log(a)
     var scoreDisplay = {
-
         finScreenText: ["You made it through a tough challenge there",
             "pudding pop", "- 30's-50's:  ", "- 60's-80's Quiz:  ", "- 90's:  ...do the math", "Total Score = "],
         backgroundImage: "url(assets/images/Allen.jpg)",
@@ -648,7 +602,6 @@ function endGame(a) {
         sixth: "",
         extra: "",
     }
-
     lines.first = (scoreDisplay.finScreenText[0]);
     lines.second = (scoreDisplay.finScreenText[2] + roundScores[0]);
     lines.third = (scoreDisplay.finScreenText[3] + (roundScores[1] - roundScores[0]));
@@ -661,9 +614,7 @@ function endGame(a) {
     var layerseh = $('canvas').getLayers('endScreenText');
     console.log(linesArr)
     debugger;
-
     // CURRENT ATTEMPT //    
-
     fixCanvas();
     for (x = 0; x < linesArr.length; x++) {
         if (x === 5) {
@@ -713,15 +664,9 @@ function endGame(a) {
             })
         }
     }
-
     // CURRENT ATEMPT END //
-
-
 }
-
-
 // END //
-
 function answerChecker(guess) {
     console.log($("#startButton").text())
     var thisAnswer;
@@ -785,11 +730,9 @@ function answerChecker(guess) {
             break;
     }
 }
-
 // need the answers for this portion //
 var answerData = [];
 var newText = [];
-
 function createText(question) {
     if (roundNumber === 1) {
         answerData = triviaAnswers.sectionOne.answers
@@ -840,25 +783,18 @@ function createText(question) {
     // var toParse = (one + " <br> " + two + " <br> " + three + " <br> " + four)
     // var toHtml = $.parseHTML(toParse)
     return canvasView(one, two, three, four)
-
 }
-
 function submitGuess(a) {
     answerChecker(a)
     console.log(a)
-
-
 }
 var currentQs = [];
-
 function roundNotInProgress(roundNumber) {
     if (roundNumber === 1) {
-
         questionNumber = 1;
         currentQs = triviaQuestions[0];
         $("#headerOne").text(triviaQs.sections.thirtiesToFifties.header)
     }
-
     // saved older one in function below //
     if (roundNumber === 2) {
         questionNumber = 1;
@@ -868,7 +804,6 @@ function roundNotInProgress(roundNumber) {
         return roundScores.push(score);
     }
     if (roundNumber === 3) {
-
         questionNumber = 1;
         $("#headerOne").text(triviaQs.sections.nineties.header);
         currentQs = triviaQuestions[2];
@@ -881,19 +816,14 @@ $("#startButton").on("click", function () {
     console.log(roundNumber, roundInProgress)
     $("#informationText").text(" ")
     if (roundNumber === 4) {
-
         endGame(score);
-
     }
     if (!roundInProgress) {
         roundNotInProgress(roundNumber);
         roundInProgress = true;
         $("#startButton").text("Next Question")
     }
-
-
     if (roundInProgress) {
-
         var controllerText = $("#startButton").text();
         // IF "NEXT QUESTION" //
         if (controllerText !== "Submit Answer" && controllerText !== "End Game" && controllerText === "Next Question") {
@@ -907,7 +837,6 @@ $("#startButton").on("click", function () {
                         createText("one");
                         canvasText = newText;
                         drawQuestion(0, 5, 150, 20);
-
                         break;
                     case 2:
                         currentCanvasText = [];
@@ -917,7 +846,6 @@ $("#startButton").on("click", function () {
                         createText("two");
                         canvasText = newText;
                         drawQuestion(1, 5, 150, 20)
-
                         break;
                     case 3:
                         currentCanvasText = [];
@@ -927,7 +855,6 @@ $("#startButton").on("click", function () {
                         createText("three");
                         canvasText = newText;
                         drawQuestion(2, 5, 150, 20)
-
                         break;
                     case 4:
                         currentCanvasText = [];
@@ -940,7 +867,6 @@ $("#startButton").on("click", function () {
                         break;
                 }
                 $("#startButton").text("Select Answer...");
-
             }
             else if (roundNumber === 2) {
                 switch (questionNumber) {
@@ -952,8 +878,6 @@ $("#startButton").on("click", function () {
                         createText("one");
                         canvasText = newText;
                         drawQuestion(0, 5, 150, 20)
-
-
                         break;
                     case 2:
                         currentCanvasText = [];
@@ -963,7 +887,6 @@ $("#startButton").on("click", function () {
                         createText("two");
                         canvasText = newText;
                         drawQuestion(1, 5, 150, 20)
-
                         break;
                     case 3:
                         currentCanvasText = [];
@@ -973,7 +896,6 @@ $("#startButton").on("click", function () {
                         createText("three");
                         canvasText = newText;
                         drawQuestion(2, 5, 150, 20)
-
                         break;
                     case 4:
                         currentCanvasText = [];
@@ -983,17 +905,13 @@ $("#startButton").on("click", function () {
                         createText("four");
                         canvasText = newText;
                         drawQuestion(3, 5, 150, 20)
-
                         break;
                 }
                 $("#startButton").text("Select Answer...");
-
             } else if (roundNumber === 3) {
                 console.log(questionNumber)
-
                 switch (questionNumber) {
                     case 1:
-
                         currentCanvasText = [];
                         currentCanvasText.push(triviaQuestions[2][0])
                         $('canvas').clearCanvas();
@@ -1001,7 +919,6 @@ $("#startButton").on("click", function () {
                         createText("one");
                         canvasText = newText;
                         drawQuestion(0, 5, 150, 20)
-
                         break;
                     case 2:
                         currentCanvasText = [];
@@ -1011,7 +928,6 @@ $("#startButton").on("click", function () {
                         createText("two");
                         canvasText = newText;
                         drawQuestion(1, 5, 150, 20)
-
                         break;
                     case 3:
                         currentCanvasText = [];
@@ -1021,7 +937,6 @@ $("#startButton").on("click", function () {
                         createText("three");
                         canvasText = newText;
                         drawQuestion(2, 5, 150, 20)
-
                         break;
                     case 4:
                         currentCanvasText = [];
@@ -1031,16 +946,12 @@ $("#startButton").on("click", function () {
                         createText("four");
                         canvasText = newText;
                         drawQuestion(3, 5, 150, 20)
-
                         break;
                     case 5:
                         currentCanvasText = [];
                         $('canvas').clearCanvas();
                         // Draw Result Board //
-
                         $("#startButton").text("Retry!")
-
-
                         break;
                     case 6:
                         $("#startButton").text("Start")
@@ -1048,16 +959,12 @@ $("#startButton").on("click", function () {
                         roundNumber = 1;
                         roundInProgress = false;
                         break;
-
                 }
                 $("#startButton").text("Select Answer...");
-
             }
-
         }
         // END //
         // IF "SELECT ANSWER" //
-
         if (controllerText !== "Submit Answer" && controllerText !== "End Game" || controllerText === "Select Answer...") {
             switch (roundNumber) {
                 case 1:
@@ -1068,12 +975,10 @@ $("#startButton").on("click", function () {
                         $("#sideRowFour").text("Round One Complete")
                     } else {
                         $(".sidebarColors").on("click", function () {
-
                             $("#startButton").text("Submit Answer")
                             return userClick[0] = ($(this).text());
                         })
                     }
-
                     break;
                 case 2:
                     if (questionNumber === 5) {
@@ -1083,7 +988,6 @@ $("#startButton").on("click", function () {
                         $("#sideRowFour").text("Round One Complete")
                     } else {
                         $(".sidebarColors").on("click", function () {
-
                             $("#startButton").text("Submit Answer")
                             return userClick[0] = ($(this).text());
                         })
@@ -1111,15 +1015,12 @@ $("#startButton").on("click", function () {
                             console.log(userClick)
                             $("#startButton").text("Submit Answer")
                             return userClick[0] = ($(this).text())
-
                         })
                     }
                     break;
             }
-
         }
         // END //
-
         // IF "SUBMIT ANSWER" //
         if (controllerText === "Submit Answer") {
             console.log(userClick)
@@ -1127,37 +1028,5 @@ $("#startButton").on("click", function () {
             userClick = [""];
         }
         // END //
-
-
-
-
     }
-
-
-
-
 })
-
-// While Round is going: //
-
-// game function work end //
-// building canvas text below //
-
-// 3:48 Saturday, April 27th Notes
-// We need to check what question is displayed, 
-
-
-
-// access that question's section, 
-// access that section's answers, 
-// connect the buttons to the answers by index,
-// check to see if the index is correct for each individual question
-
-
-
-
-
-
-// Canvas Work //
-
-// End Canvas Work //
