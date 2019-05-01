@@ -130,6 +130,8 @@ for (section = 0; section < 8; section++) {
                 backgroundColor: "rgba(46, 86, 131, 0.8)",
                 position: "relative",
                 zIndex: "2",
+                boxShadow: "inset 0px 0px 4px rgba(20, 20, 20, 0.8)",
+                fontFamily: "Gugi, cursive"
             });
             break;
         case 1:
@@ -155,6 +157,11 @@ for (section = 0; section < 8; section++) {
             $("#headerOne").text("Las Trivi-Eras")
             $("#headerOne").css({
                 textAlign: "center",
+                backgroundColor: "white",
+                borderRadius: "15px",
+                border: "1px solid grey",
+                boxShadow: "0px 0px 4px rgb(20, 20, 20)",
+                fontFamily: "Gugi, cursive"
             })
             break;
         case 3:
@@ -247,7 +254,6 @@ for (section = 0; section < 8; section++) {
                 height: "15vh",
                 textAlign: "center",
                 fontSize: "2em",
-                fontFamily: "Georgia, sans-serif",
                 color: "black",
                 borderRadius: "10px"
             })
@@ -274,6 +280,7 @@ for (section = 0; section < 8; section++) {
                 position: "absolute",
                 zIndex: "1",
                 display: "flex",
+                boxShadow: "inset 0px 0px 4px rgba(20, 20, 20, 0.7)"
             }),
                 $("#mainWrap").append(canvas);
             $("#myCanvas").css({
@@ -355,6 +362,20 @@ for (section = 0; section < 8; section++) {
         }
     })
 }
+$("#sidebar").css({
+    fontFamily: "'Dosis', sans-serif"
+})
+$("#headerOne").css({
+    fontFamily: "'Dosis', sans-serif"
+})
+$("#informationText").css({
+    fontFamily: "'Dosis', sans-serif"
+})
+$(".sidebarColors").css({
+    fontFamily: "'Dosis', sans-serif",
+    textShadow: "1px 1px black",
+    boxShadow: "1px 0px 2px black"
+})
 // Page Loaded //
 //---------------------------------------------------------------------------------------------------------------------------------//
 //Start adding Function //
@@ -845,6 +866,14 @@ function roundNotInProgress(roundNumber) {
         $("#sidebar").css({
             backgroundColor: "rgba(100, 100, 70, 0.7)",
             boxShadow: "inset 0px 0px 4px black",
+            fontFamily: "Montserrat, sans-serif",
+            transition: ".5s ease",
+        })
+        $(".sidebarColors").css({
+            color: "blue",
+            textShadow: "1px 1px 1px orange",
+            boxShadow: "1px 1px 1px 0px black",
+            fontSize: "2em",
             transition: ".5s ease",
         })
         $('canvas').css({
@@ -852,6 +881,13 @@ function roundNotInProgress(roundNumber) {
             border: "1px solid black",
             boxShadow: "inset 0px 0px 10px black",
             transition: ".5s ease",
+        })
+        $("#informationText").css({
+            fontFamily: "Montserrat, sans-serif !important"
+        })
+        $("#startButton").css({
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "1.5em"
         })
     }
     // saved older one in function below //
@@ -878,6 +914,14 @@ function roundNotInProgress(roundNumber) {
         $("#sidebar").css({
             backgroundColor: "rgba(175, 50, 175, 0.7)",
             boxShadow: "inset 0px 0px 4px black",
+            fontFamily: "Wendy One, sans-serif",
+            transition: ".5s ease",
+        })
+        $(".sidebarColors").css({
+            color: "rgb(220, 100, 220)",
+            textShadow: "1px 1px 1px black",
+            boxShadow: "1px 1px 1px 0px black",
+            fontSize: "2em",
             transition: ".5s ease",
         })
         $('canvas').css({
@@ -885,6 +929,13 @@ function roundNotInProgress(roundNumber) {
             border: "1px solid black",
             boxShadow: "inset 0px 0px 10px black",
             transition: ".5s ease",
+        })
+        $("#informationText").css({
+            fontFamily: "Wendy One, sans-serif"
+        })
+        $("#startButton").css({
+            fontFamily: "Wendy One, sans-serif",
+            fontSize: "1.5em"
         })
         currentQs = triviaQuestions[1];
         fixCanvas();
@@ -901,7 +952,7 @@ function roundNotInProgress(roundNumber) {
             textShadow: "2px 2px salmon",
             borderRadius: "15px",
             border: "1px 1px solid purple",
-            boxShadow: "inset 0px 2px 3px 1px rgb(20, 20, 50)",
+            boxShadow: "0px 2px 3px 1px rgb(20, 20, 50)",
             transition: ".5s ease",
         })
         $("#mainWrap").css({
@@ -913,6 +964,14 @@ function roundNotInProgress(roundNumber) {
         $("#sidebar").css({
             backgroundColor: "rgba(253, 128, 140, 0.7)",
             boxShadow: "inset 0px 0px 4px black",
+            fontFamily: "Gugi, cursive",
+            transition: ".5s ease",
+        })
+        $(".sidebarColors").css({
+            color: "lawngreen",
+            textShadow: "1px 1px 1px purple",
+            fontSize: "2em",
+            boxShadow: "1px 1px 1px 0px purple",
             transition: ".5s ease",
         })
         $('canvas').css({
@@ -920,6 +979,12 @@ function roundNotInProgress(roundNumber) {
             border: "1px solid black",
             boxShadow: "inset 0px 0px 10px black",
             transition: ".5s ease",
+        })
+        $("#informationText").css({
+            fontFamily: "Gugi, cursive"
+        })
+        $("#startButton").css({
+            fontFamily: "Gugi, cursive",
 
         })
         currentQs = triviaQuestions[2];
