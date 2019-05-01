@@ -388,7 +388,7 @@ var triviaQs = {
             questions: ["Was Limp Bizkit at the Forefront of style and culture?",
                 "_____ Little Pill was Alanis Morissette's only achievement",
                 "Bradley Nowell sang for which band until what year?",
-                "2 minutes after midnight on Y2K, this country had a Nuclear Power Plant scare"],
+                "What country had a Nuclear Power Plant scare at 12:02 01-01-2000?"],
         }
 
     }
@@ -561,7 +561,6 @@ var score = 0;
 var roundScores = [];
 function drawQuestion(qnumber, fs, fx, fy) {
     fixCanvas();
-
     for (x = 0; x < canvasText.length; x++) {
         if (x != 0) {
             $('canvas').drawText({
