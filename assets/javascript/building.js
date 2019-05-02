@@ -49,6 +49,7 @@ var objectstoadd = {
                 self: $("<h1>", { id: "headerOne", class: "" }),
                 styling: {
                     textAlign: "center",
+
                 }
             }
         },
@@ -156,6 +157,8 @@ for (section = 0; section < 8; section++) {
             $("#headCol").append(header);
             $("#headerOne").text("Las Trivi-Eras")
             $("#headerOne").css({
+                position: "relative",
+
                 textAlign: "center",
                 backgroundColor: "white",
                 borderRadius: "15px",
@@ -307,57 +310,68 @@ for (section = 0; section < 8; section++) {
             break;
     }
     var SBSfunction = $("#showSideButton")
-    var SBSfunctionMainwrap = objectstoadd.sections.main.self
     var sideSlide = false;
     SBSfunction.on("click", function () {
         if (!sideSlide) {
-            $("#sidebar").animate({
-                width: "18vw",
-                paddingLeft: "0 !important",
-            }, 500, "linear")
-            $("#showSideButton").animate({ left: "18vw" }, 500, "linear")
-            $("#informationText").animate({
-                height: "25vh",
-                fontSize: "1.5em",
-                minWidth: "12vw",
-                height: "30vh",
-                borderRadius: "10px"
-            }, 500, "linear")
-            $("#myCanvas").animate({
-                marginLeft: "20vw",
-                width: "75vw",
-            }, 500, "linear")
-            $("#headerOne").animate({
-                fontSize: "3em",
-                height: "20vh",
-                width: "13vw",
-                paddingRight: "0vw"
-            }, 320, "linear")
+            function slideLeft() {
+                $("#sidebar").animate({
+                    width: "18vw",
+                    paddingLeft: "0 !important",
+                }, 500, "linear")
+                $("#showSideButton").animate({ left: "18vw" }, 500, "linear")
+                $("#informationText").animate({
+                    height: "25vh",
+                    fontSize: "1.5em",
+                    width: "12.5vw",
+                    height: "30vh",
+                    borderRadius: "10px"
+                }, 500, "linear")
+                $("#myCanvas").animate({
+                    marginLeft: "20vw",
+                    width: "75vw",
+                }, 500, "linear")
+                $("#headerOne").animate({
+                    fontSize: "3em",
+                    height: "18vh",
+                    width: "13vw",
+                    right: "1vw",
+                }, 320, "linear")
+                $("#startButton").animate({
+                    fontSize: "2em",
+                    height: "10vh"
+                })
+            }
+            slideLeft();
             sideSlide = true;
         }
         else if (sideSlide) {
-            $("#sidebar").animate({
-                width: "25vw"
-            }, 500, "linear")
-            $("#informationText").animate({
-                height: "20vh",
-                fontSize: "2em",
-                minWidth: "16vw",
-                height: "20vh",
-                borderRadius: "10px",
-            }, 500, "linear")
-            $("#myCanvas").animate({
-                marginLeft: "30vw",
-                width: "65vw",
-            }, 500, "linear")
-            $("#showSideButton").animate({ left: "25vw" }, 500, "linear")
-            $("#headerOne").animate({
-                fontSize: "4em",
-                height: "25vh",
-                width: "18vw",
-                paddingRight: "1vw"
-            }, 320, "linear")
-
+            function slideRight() {
+                $("#sidebar").animate({
+                    width: "25vw"
+                }, 500, "linear")
+                $("#informationText").animate({
+                    height: "20vh",
+                    fontSize: "2em",
+                    width: "17.5vw",
+                    height: "20vh",
+                    borderRadius: "10px",
+                }, 500, "linear")
+                $("#myCanvas").animate({
+                    marginLeft: "30vw",
+                    width: "65vw",
+                }, 500, "linear")
+                $("#showSideButton").animate({ left: "25vw" }, 500, "linear")
+                $("#headerOne").animate({
+                    fontSize: "4em",
+                    height: "25vh",
+                    width: "16vw",
+                    right: "0vw",
+                }, 320, "linear")
+                $("#startButton").animate({
+                    fontSize: "3em"
+                })
+            }
+            slideRight();
             sideSlide = false;
         }
     })
@@ -516,7 +530,6 @@ $("#showSideButton").on("click", function () {
             y: "80vh",
             scaleX: 1, scaleY: 1
         })
-        $("#headerOne").css({ fontSize: "2em", height: "17vh", paddingLeft: "none", width: "8vw" })
         if (roundInProgress) {
             $("#startButton").text("Next")
         }
@@ -532,7 +545,6 @@ $("#showSideButton").on("click", function () {
             y: "80vh",
             scaleX: 1, scaleY: 1
         })
-        $("#headerOne").css({ fontSize: "4em", height: "17vh", paddingLeft: "none", width: "15vw" })
         if (roundInProgress) {
             $("#startButton").text("Next Question")
         }
@@ -608,6 +620,7 @@ function answerHelper(a, b) {
             borderRadius: "10px"
         }, 200, "swing", function () {
             $("#startButton").text("Next Question");
+            setTimeout(function () { $("#startButton").fadeOut(200).fadeIn(200) }, 800)
         })
         $("#sideRowFifth").animate({
             backgroundColor: "rgba(180, 180, 180, 0.3)",
@@ -622,14 +635,15 @@ function answerHelper(a, b) {
         $("#sideRowFifth").animate({
             backgroundColor: "red",
             borderRadius: "10px"
-        }, 200, "swing", function () {
+        }, 200, "linear", function () {
             $("#startButton").text("Next Question")
+            $("#startButton").fadeOut(300).fadeIn(300)
 
         })
         $("#sideRowFifth").animate({
             backgroundColor: "rgba(180, 180, 180, 0.3)",
             borderRadius: "10px"
-        }, 1500, "swing")
+        }, 1500, "linear")
 
     }
 }
@@ -720,8 +734,10 @@ function endGame(a) {
     // CURRENT ATEMPT END //
 }
 // END //
+
 function answerChecker(guess) {
     console.log($("#startButton").text())
+
     var thisAnswer;
     switch (roundNumber) {
         case 1:
@@ -855,19 +871,19 @@ function roundNotInProgress(roundNumber) {
             borderRadius: "15px",
             border: "1px solid orange",
             boxShadow: "inset 0px 2px 3px 1px rgb(20, 20, 50)",
-            transition: ".5s ease",
         })
         $("#mainWrap").css({
             backgroundImage: "url(assets/images/background-blur-blurred-949587.jpg)",
             backgroundSize: "cover",
             boxShadow: "inset 0px 0px 4px black",
             transition: ".5s ease",
+
         })
         $("#sidebar").css({
             backgroundColor: "rgba(100, 100, 70, 0.7)",
             boxShadow: "inset 0px 0px 4px black",
             fontFamily: "Montserrat, sans-serif",
-            transition: ".5s ease",
+
         })
         $(".sidebarColors").css({
             color: "blue",
@@ -880,7 +896,7 @@ function roundNotInProgress(roundNumber) {
             backgroundColor: "rgba(250, 250, 250, 0.8)",
             border: "1px solid black",
             boxShadow: "inset 0px 0px 10px black",
-            transition: ".5s ease",
+
         })
         $("#informationText").css({
             fontFamily: "Montserrat, sans-serif !important"
@@ -903,7 +919,6 @@ function roundNotInProgress(roundNumber) {
             borderRadius: "15px",
             border: "1px solid orange",
             boxShadow: "inset 0px 2px 3px 1px rgb(20, 20, 50)",
-            transition: ".5s ease",
         })
         $("#mainWrap").css({
             backgroundImage: "url(assets/images/art-artistic-attractive-990824.jpg)",
@@ -915,20 +930,23 @@ function roundNotInProgress(roundNumber) {
             backgroundColor: "rgba(175, 50, 175, 0.7)",
             boxShadow: "inset 0px 0px 4px black",
             fontFamily: "Wendy One, sans-serif",
-            transition: ".5s ease",
         })
         $(".sidebarColors").css({
             color: "rgb(220, 100, 220)",
             textShadow: "1px 1px 1px black",
             boxShadow: "1px 1px 1px 0px black",
+            border: "1px solid orange",
+            borderRight: "none",
             fontSize: "2em",
             transition: ".5s ease",
+        })
+        $("#Four").css({
+            borderRight: "1px solid orange !important"
         })
         $('canvas').css({
             backgroundColor: "rgba(250, 250, 250, 0.8)",
             border: "1px solid black",
             boxShadow: "inset 0px 0px 10px black",
-            transition: ".5s ease",
         })
         $("#informationText").css({
             fontFamily: "Wendy One, sans-serif"
@@ -953,7 +971,6 @@ function roundNotInProgress(roundNumber) {
             borderRadius: "15px",
             border: "1px 1px solid purple",
             boxShadow: "0px 2px 3px 1px rgb(20, 20, 50)",
-            transition: ".5s ease",
         })
         $("#mainWrap").css({
             backgroundImage: "url(assets/images/90s-website-style.jpg)",
@@ -965,7 +982,6 @@ function roundNotInProgress(roundNumber) {
             backgroundColor: "rgba(253, 128, 140, 0.7)",
             boxShadow: "inset 0px 0px 4px black",
             fontFamily: "Gugi, cursive",
-            transition: ".5s ease",
         })
         $(".sidebarColors").css({
             color: "lawngreen",
@@ -978,7 +994,6 @@ function roundNotInProgress(roundNumber) {
             backgroundColor: "rgba(250, 250, 250, 0.8)",
             border: "1px solid black",
             boxShadow: "inset 0px 0px 10px black",
-            transition: ".5s ease",
         })
         $("#informationText").css({
             fontFamily: "Gugi, cursive"
@@ -993,7 +1008,11 @@ function roundNotInProgress(roundNumber) {
     }
 }
 var userClick = [];
+
+
+
 $("#startButton").on("click", function () {
+
     console.log(roundNumber, roundInProgress)
     $("#informationText").text(" ")
     if (roundNumber === 4) {
@@ -1008,6 +1027,7 @@ $("#startButton").on("click", function () {
         var controllerText = $("#startButton").text();
         // IF "NEXT QUESTION" //
         if (controllerText !== "Submit Answer" && controllerText !== "End Game" && controllerText === "Next Question") {
+
             if (roundNumber === 1) {
                 switch (questionNumber) {
                     case 1:
@@ -1149,6 +1169,7 @@ $("#startButton").on("click", function () {
         if (controllerText !== "Submit Answer" && controllerText !== "End Game" || controllerText === "Select Answer...") {
             switch (roundNumber) {
                 case 1:
+
                     if (questionNumber === 5) {
                         $("#startButton").text("Next Round")
                         roundInProgress = false;
@@ -1159,7 +1180,7 @@ $("#startButton").on("click", function () {
                             $("#startButton").text("Submit Answer")
                             userClick[0] = ($(this).text())
                             $("#informationText").html("Your Choice: " + userClick[0] + "<br>" + "   And...")
-                            return
+
                         })
                     }
                     break;
@@ -1172,6 +1193,7 @@ $("#startButton").on("click", function () {
                     } else {
                         $(".sidebarColors").on("click", function () {
                             $("#startButton").text("Submit Answer")
+
                             userClick[0] = ($(this).text())
                             $("#informationText").html("Your Choice: " + userClick[0] + "<br>" + "   And...")
                             return
@@ -1199,6 +1221,7 @@ $("#startButton").on("click", function () {
                         $(".sidebarColors").on("click", function () {
                             console.log(userClick)
                             $("#startButton").text("Submit Answer")
+
                             userClick[0] = ($(this).text())
                             $("#informationText").html("Your Choice: " + userClick[0] + "<br>" + "   And...")
                             return
@@ -1206,6 +1229,7 @@ $("#startButton").on("click", function () {
                     }
                     break;
             }
+
         }
         // END //
         // IF "SUBMIT ANSWER" //
